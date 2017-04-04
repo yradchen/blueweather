@@ -9,7 +9,6 @@ const handleResponse = (results, status) => {
     const lat = results[0].geometry.location.lat();
     const long = results[0].geometry.location.lng();
     console.log(lat, long);
-    // debugger
     console.log(fetchWeather(lat, long));
   } else {
     console.log("failure");
@@ -19,7 +18,7 @@ const handleResponse = (results, status) => {
 const fetchWeather = (lat, long) => {
   var proxy = 'https://cors-anywhere.herokuapp.com/';
   const baseUrl = 'https://api.darksky.net/forecast/';
-  
+
   const url = `${baseUrl}${key}/${lat},${long}`;
   // const url = baseUrl + key + "/" + lat  + "," + long;
   return $.ajax({
