@@ -11,12 +11,14 @@ class SessionForm extends React.Component {
     return e => this.setState({[field]: e.currentTarget.value});
   }
 
-  createInput(type) {
-    return (<input type='text'
-      value={this.state.type}
-      placeholder={type}
-      onChange={this.update(type)}
-      key={type}
+  createInput(fieldName) {
+    const type = fieldName === 'username' ? 'text' : fieldName;
+
+    return (<input type={type}
+      value={this.state.fieldName}
+      placeholder={fieldName}
+      onChange={this.update(fieldName)}
+      key={fieldName}
       className="capitalize"
     />
     );
@@ -28,6 +30,7 @@ class SessionForm extends React.Component {
       return this.createInput(field);
     });
   }
+  
   createSubmit() {
     return (
       <input
@@ -44,11 +47,18 @@ class SessionForm extends React.Component {
 
 
   render() {
+    const errors = this.props.errors.map((err, idx) => (
+      <li key={idx}>{err}</li>
+    ));
+
     return (
-      <form onSubmit={this.handleSubmit}>
-        {this.setFields()}
-        {this.createSubmit()}
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          {this.setFields()}
+          {this.createSubmit()}
+        </form>
+        {errors}
+      </div>
 
     );
   }
