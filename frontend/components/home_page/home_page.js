@@ -6,6 +6,7 @@ class HomePage extends React.Component {
     this.state = { currentLocation: "", historicLocation : "" };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleResponse = this.handleResponse.bind(this);
+    this.fetchWeather.bind(this);
   }
 
   searchAddress(locationType) {
@@ -18,24 +19,28 @@ class HomePage extends React.Component {
     if (status === google.maps.GeocoderStatus.OK) {
       const lat = results[0].geometry.location.lat();
       const long = results[0].geometry.location.lng();
-      console.log(lat, long);
-      // this.fetchWeather(lat, long);
+      // console.log(lat, long);
+      this.fetchWeather(lat, long);
     } else {
       console.log("failure");
     }
   }
 
   fetchWeather (lat, long) {
-    var proxy = 'https://cors-anywhere.herokuapp.com/';
-    const baseUrl = 'https://api.darksky.net/forecast/';
-    const url = `${baseUrl}${key}/${lat},${long}`;
-    return $.ajax({
-      method: 'GET',
-      url: proxy + url
-    }).then(data => {
-      console.log(data);
-      // get the time, multiply by 1000 and new Date(time) = readable time.
-    });
+    this.props.fetchWeather(lat, long);
+    // var proxy = 'https://cors-anywhere.herokuapp.com/';
+    // const baseUrl = 'https://api.darksky.net/forecast/';
+    // const key = "ed962598e51297ed8e2ffacf5d6522b4";
+    // const url = `${baseUrl}${key}/${lat},${long}`;
+    //
+    // $.ajax({
+    //   method: 'GET',
+    //   url: proxy + url
+    // }).then(data => {
+    //
+    //   // get the time, multiply by 1000 and new Date(time) = readable time.
+    //   // send data to the reducer.
+    // }).bind(this);
   }
 
   update(field) {
@@ -48,9 +53,6 @@ class HomePage extends React.Component {
       this.searchAddress(locationType);
       this.setState({ [locationType]: "" });
     };
-
-
-
   }
 
   render() {
