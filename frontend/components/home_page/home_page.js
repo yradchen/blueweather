@@ -3,14 +3,14 @@ import React from 'react';
 class HomePage extends React.Component {
   constructor (props) {
     super(props);
-    this.state = { search: "" };
+    this.state = { currentLocation: "", historicLocation : "" };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleResponse = this.handleResponse.bind(this);
   }
 
-  searchAddress() {
+  searchAddress(locationType) {
     const geocoder = new google.maps.Geocoder();
-    const address = this.state.search;
+    const address = this.state[locationType];
     geocoder.geocode({ address }, this.handleResponse);
   }
 
@@ -19,7 +19,7 @@ class HomePage extends React.Component {
       const lat = results[0].geometry.location.lat();
       const long = results[0].geometry.location.lng();
       console.log(lat, long);
-      this.fetchWeather(lat, long);
+      // this.fetchWeather(lat, long);
     } else {
       console.log("failure");
     }
@@ -42,18 +42,31 @@ class HomePage extends React.Component {
     return e => this.setState({[field]: e.currentTarget.value});
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    this.searchAddress();
-    this.setState({ search: "" });
+  handleSubmit(locationType) {
+    return (e) => {
+      e.preventDefault();
+      this.searchAddress(locationType);
+      this.setState({ [locationType]: "" });
+    };
+
+
+
   }
 
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit("currentLocation")}>
+          <p>Enter a location for current weather</p>
         <input type="text"
-          onChange={this.update("search")}
+          onChange={this.update("currentLocation")}
+          value={this.state.search}
+        />
+        </form>
+        <form onSubmit={this.handleSubmit("historicLocation")}>
+          <p>Enter a date and location for historic weather</p>
+        <input type="text"
+          onChange={this.update("historicLocation")}
           value={this.state.search}
         />
         </form>
