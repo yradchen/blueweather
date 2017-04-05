@@ -8,9 +8,11 @@ class HomePage extends React.Component {
   }
 
   searchAddress() {
-    const geocorder = new google.maps.Geocoder();
-    geocoder.geocode({address: addressInput}, this.handleResponse);
+    const geocoder = new google.maps.Geocoder();
+    const address = this.state.search;
+    geocoder.geocode({ address }, this.handleResponse);
   }
+  
   handleResponse(results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
       const lat = results[0].geometry.location.lat();
