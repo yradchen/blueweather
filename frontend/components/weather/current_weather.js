@@ -1,14 +1,19 @@
 import React from 'react';
-
+import graphWeather from './graph_weather';
 
 class CurrentWeather extends React.Component {
   constructor (props) {
     super(props);
   }
 
+  componentDidMount() {
+    // console.log(graphWeather);
+    graphWeather();
+  }
+
   weatherSummary(date) {
     const weather = this.props.weather[date];
-    
+
     return (
       <div>
         <p>Current Weather</p>
@@ -40,14 +45,15 @@ class CurrentWeather extends React.Component {
   }
 
   render() {
-    if (this.props.weather.currently === undefined) return null;
+    // if (this.props.weather.currently === undefined) return null;
     return (
       <div>
-        <section>{this.weatherSummary("currently")}</section>
+        <svg width="960" height="500"></svg>
+        {/* <section>{this.weatherSummary("currently")}</section> */}
 
         <section>
           {/* <p>Week Summary: {this.weatherSummary("daily")}</p> */}
-          <section>Week Days {this.weatherWeek()}  </section>
+          {/* <section>Week Days {this.weatherWeek()}  </section> */}
         </section>
       </div>
     );
