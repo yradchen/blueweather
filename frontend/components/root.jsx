@@ -2,6 +2,7 @@ import React from 'react';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import App from './app'
 import SessionFormContainer from './session/session_form_container';
+import HomePageContainer from './home_page/home_page_container';
 import { Provider } from 'react-redux';
 
 const Root = ({ store }) => {
@@ -17,7 +18,8 @@ const Root = ({ store }) => {
   return (
     <Provider store={ store }>
       <Router history={ hashHistory } onUpdate={ () => window.scrollTo(0, 0) } >
-        <Route path="/" component={ App }>
+        <Route component={ App }>
+          <Route path="/" component={HomePageContainer} />
           <Route onEnter={_redirectIfLoggedIn(store)}>
             <Route path="login" component={SessionFormContainer} />
             <Route path="signup" component={SessionFormContainer} />

@@ -3,7 +3,7 @@ class FutureWeather extends React.Component {
   componentDidMount() {
     this.setupd3();
   }
-
+  
   setupd3() {
     const data = [
       {"date": 1, "close":20},
@@ -58,12 +58,5 @@ class FutureWeather extends React.Component {
           .attr("stroke-linecap", "round")
           .attr("stroke-width", 1.5)
           .attr("d", line);
-  }
-  render() {
-    return {
-      <section>
-        <svg width="960" height="500"></svg>
-      </section>
-    }
   }
 }
