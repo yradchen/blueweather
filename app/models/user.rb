@@ -30,7 +30,8 @@ class User < ApplicationRecord
   end
 
   def self.find_by_credentials(username, password)
-    user = User.find_by(username: username)
+    user = User.where("lower(username) LIKE ?", "#{username}").first
+    # user = User.find_by(username: username)
     return nil if user.nil?
     return nil unless user.is_password?(password)
     user

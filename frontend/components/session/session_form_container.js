@@ -3,17 +3,17 @@ import { login, logout, signup } from '../../actions/session_actions';
 import SessionForm from './session_form';
 
 const mapStateToProps = (state, ownProps) => {
-
   return {
-    loggedIn: Boolean(state.session.currentUser),
+    loggedIn: Boolean(state.session.username),
+    formType: ownProps.route.path,
     errors: state.errors
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
+  const action = ownProps.route.path === "login" ? login : signup;
   return {
-    signup: user => dispatch(signup(user)),
-    login: user => dispatch(login(user))
+    action: user => dispatch(action(user))
   };
 };
 

@@ -10,6 +10,19 @@ class SessionForm extends React.Component {
   update(field) {
     return e => this.setState({[field]: e.currentTarget.value});
   }
+  componentDidMount() {
+    this.redirectIfLoggedIn();
+  }
+
+  componentDidUpdate() {
+    this.redirectIfLoggedIn();
+  }
+
+  redirectIfLoggedIn() {
+    if (this.props.loggedIn) {
+      this.props.router.push("/");
+    }
+  }
 
   createInput(fieldName) {
     const type = fieldName === 'username' ? 'text' : fieldName;
@@ -25,24 +38,29 @@ class SessionForm extends React.Component {
   }
 
   setFields() {
-    const fields = ["email", "username", "password"];
+    const fields = ["username", "password"];
+    if (this.props.formType === "signup") {
+      fields.push("email");
+    }
+
     return fields.map(field => {
       return this.createInput(field);
     });
   }
-  
+
   createSubmit() {
+    const value = this.props.formType === "login" ? "Sign In" : "Create Account";
     return (
       <input
         type="submit"
-        value="Create Account"
+        value={value}
       />
     );
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.signup(this.state);
+    this.props.action(this.state);
   }
 
 
