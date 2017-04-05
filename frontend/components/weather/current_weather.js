@@ -6,10 +6,13 @@ class CurrentWeather extends React.Component {
     super(props);
   }
 
-  componentDidMount() {
-    // console.log(graphWeather);
-    graphWeather();
+  componentDidUpdate() {
+    if (this.props.weather.hourly) {
+      graphWeather(this.props.weather.hourly.data);
+    }
+
   }
+
 
   weatherSummary(date) {
     const weather = this.props.weather[date];
