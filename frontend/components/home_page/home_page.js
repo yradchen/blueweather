@@ -19,6 +19,8 @@ class HomePage extends React.Component {
   handleResponse(locationType) {
     return (results, status) => {
       if (status === google.maps.GeocoderStatus.OK) {
+        
+        // location = results[0].formatted_address "New York, NY, USA"
         const lat = results[0].geometry.location.lat();
         const long = results[0].geometry.location.lng();
         this.fetchWeather(lat, long, locationType);
@@ -48,20 +50,22 @@ class HomePage extends React.Component {
   }
 
   render() {
+
     return (
       <div>
         <form onSubmit={this.handleSubmit("currentLocation")}>
           <p>Enter a location for current weather</p>
         <input type="text"
           onChange={this.update("currentLocation")}
-          value={this.state.search}
+          value={this.state.currentLocation}
         />
+
         </form>
         <form onSubmit={this.handleSubmit("historicLocation")}>
           <p>Enter a date and location for historic weather</p>
         <input type="text"
           onChange={this.update("historicLocation")}
-          value={this.state.search}
+          value={this.state.historicLocation}
         />
         </form>
       </div>

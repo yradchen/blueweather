@@ -1,33 +1,32 @@
 import React from 'react';
 import graphWeather from './graph_weather';
 
-class CurrentWeather extends React.Component {
+class HistoricWeather extends React.Component {
   constructor (props) {
     super(props);
   }
 
   componentDidUpdate() {
+    debugger
     if (this.props.weather.hourly) {
       graphWeather(this.props.weather.hourly.data);
     }
   }
-  // <img src={images.cloudy}/>
-  setWeatherImage(string) {
-    const imageName = string.split("-").join("");
-    return <img src={images[imageName]} />;
-  }
+
+
   weatherSummary(date) {
     const weather = this.props.weather[date];
 
     return (
-      <div className="current-weather">
-        <p>Today</p>
+      <div>
+        <p>Current Weather</p>
         <p>{weather.summary}</p>
-        {this.setWeatherImage(weather.icon)}
+        <p>FUTURE CURRENT WEATHER ICON: {weather.icon}</p>
         <p>Current Temp: {weather.temperature}</p>
-        <p>Chance of Precipitation: {Math.round(weather.precipProbability * 100)}%</p>
+        <p>Chance of Precipitation: {weather.precipProbability * 100}%</p>
       </div>
     );
+    // currently find temperature
   }
 
   weatherWeek() {
@@ -36,27 +35,29 @@ class CurrentWeather extends React.Component {
       const date = new Date(datum.time * 1000).toDateString();
 
       return (
-        <div key={date} className="daily-weather">
+        <div key={date}>
           <p>{date}</p>
           <p>{datum.summary}</p>
-          {this.setWeatherImage(datum.icon)}
+          <p>FUTURE IMAGE FOR: {datum.icon}</p>
           <p>Min Temp: {datum.temperatureMin}</p>
           <p>Max Temp: {datum.temperatureMax}</p>
-          <p>Chance of Percipitation: {Math.round(datum.precipProbability * 100)}%</p>
+          <p>Chance of {datum.precipType}: {datum.precipProbability * 100}%</p>
         </div>
       );
     });
   }
 
   render() {
-    if (this.props.weather.currently === undefined) return null;
-
+    // if (this.props.weather.currently === undefined) return null;
     return (
       <div>
         <svg width="960" height="500"></svg>
-        <section className="week-container">
-          {this.weatherSummary("currently")}
-          {this.weatherWeek()}
+        {/* <section>{this.weatherSummary("currently")}</section> */}
+
+        <section>
+          <p>HI!</p>
+          {/* <p>Week Summary: {this.weatherSummary("daily")}</p> */}
+          {/* <section>Week Days {this.weatherWeek()}  </section> */}
         </section>
       </div>
     );
@@ -64,7 +65,7 @@ class CurrentWeather extends React.Component {
 
 }
 
-export default CurrentWeather;
+export default HistoricWeather;
 
 // this.props.weather.currently.temperature
 // this.props.weather.currently.icon

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
-import CurrentWeather from './current_weather';
+import HistoricWeather from './historic_weather';
+
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -12,4 +13,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CurrentWeather);
+export default connect(mapStateToProps, mapDispatchToProps)(HistoricWeather);

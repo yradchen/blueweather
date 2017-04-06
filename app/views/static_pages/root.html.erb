@@ -1,4 +1,3 @@
-
 <script type="text/javascript">
   <% if logged_in? %>
     window.currentUser = <%= render(
@@ -6,6 +5,18 @@
       user: current_user
     ).html_safe %>
   <% end %>
+  window.images = {
+  clearday: "<%= image_path("clear-day.png") %>",
+  clearnight: "<%= image_path("clear-night.png") %>",
+  cloudy: "<%= image_path("cloudy.png") %>",
+  fog: "<%= image_path("fog.png") %>",
+  partlycloudyday: "<%= image_path("partly-cloudy-day.png") %>",
+  partlycloudynight: "<%= image_path("partly-cloudy-night.png") %>",
+  rain: "<%= image_path("rain.png") %>",
+  sleet: "<%= image_path("sleet.png") %>",
+  snow: "<%= image_path("snow.png") %>",
+  wind: "<%= image_path("wind.png") %>"
+};
 </script>
 
 <main id="root"></main>
