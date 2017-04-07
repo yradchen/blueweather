@@ -7,7 +7,6 @@ class HistoricWeather extends React.Component {
   }
 
   componentDidUpdate() {
-    debugger
     if (this.props.weather.hourly) {
       graphWeather(this.props.weather.hourly.data);
     }
