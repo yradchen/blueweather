@@ -5,10 +5,8 @@ import moment from 'moment';
 class HomePage extends React.Component {
   constructor (props) {
     super(props);
-    this.state = { currentLocation: "", historicLocation : "", date: "" };
+    this.state = { current: "", historic: "", date: "" };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleResponse = this.handleResponse.bind(this);
-    this.fetchWeather.bind(this);
   }
 
   componentDidMount() {
@@ -17,44 +15,6 @@ class HomePage extends React.Component {
     }
   }
 
-  searchAddress(locationType) {
-    const geocoder = new google.maps.Geocoder();
-    let address = this.state[locationType];
-    this.props.fetchWeather(address).then(data =>{
-      const location = data.weather[1];
-      hashHistory.push(`current/${location}`);
-    });
-    // geocoder.geocode({ address }, this.handleResponse(locationType));
-  }
-
-  handleResponse(locationType) {
-    return (results, status) => {
-      if (status === google.maps.GeocoderStatus.OK) {
-
-        const location = results[0].formatted_address;
-
-        const lat = results[0].geometry.location.lat();
-        const long = results[0].geometry.location.lng();
-        this.fetchWeather(lat, long, location, locationType);
-      } else {
-        console.log("failure");
-      }
-    };
-  }
-
-  fetchWeather (lat, long, location, locationType) {
-    const url = locationType === "currentLocation" ? "current" : "historic";
-    let date;
-    if (locationType === "historicLocation") {
-      date = new Date(this.state.date).getTime() / 1000;
-    }
-    this.props.createSearch( { search: { lat, long, location } } );
-    this.props.fetchWeather(lat, long, date).then(
-      hashHistory.push(`${url}/${location}`)
-    );
-  }
-
-
   update(field) {
     return e => this.setState({[field]: e.currentTarget.value});
   }
@@ -62,32 +22,41 @@ class HomePage extends React.Component {
   handleSubmit(locationType) {
     return (e) => {
       e.preventDefault();
-      this.searchAddress(locationType);
-      this.setState({ [locationType]: "" });
+      const search_params = this.setSearchParams(locationType);
+      this.props.fetchWeather(search_params).then(data =>{
+        const location = data.weather[1];
+        hashHistory.push(`${locationType}/${location}`);
+      });
+
     };
   }
+
+  setSearchParams(locationType) {
+    const address = { address: this.state[locationType] };
+    if (locationType  === "historic") {
+      address.date = this.parseDate();
+    }
+    return address;
+  }
+
+  parseDate() {
+    return  new Date(this.state.date).getTime() / 1000;
+  }
+
+
+
 
   searchLi(search) {
     const date = moment(search.created_at).format('MMMM Do YYYY, h:mm:ss a');
     return (
       <li key={search.created_at}
         className="flex search-li"
-        onClick={() => this.fetchWeather(search.lat, search.long, search.location, "currentLocation")}
+        // onClick={() => this.fetchWeather(search.lat, search.long, search.location, "currentLocation")}
         >
         <p>{search.location}</p>
         <p>{date}</p>
       </li>
     );
-  }
-
-  search(lat, long, location) {
-    return (e) => {
-      let date;
-      this.props.createSearch( { search: { lat, long, location } } );
-      this.props.fetchWeather(lat, long, date).then(
-        hashHistory.push(`${url}/${location}`)
-      );
-    };
   }
 
   setSearchHistory() {
@@ -102,7 +71,6 @@ class HomePage extends React.Component {
   }
 
   createSearch() {
-
     if (this.props.currentUser) {
       return (
         <div id="search-history" className="form height-set">
@@ -117,11 +85,11 @@ class HomePage extends React.Component {
     return (
       <section className="form-container">
         <div className="form height-set">
-          <form onSubmit={this.handleSubmit("currentLocation")}>
+          <form onSubmit={this.handleSubmit("current")}>
             <p>Find the current weather for:</p>
           <input type="text"
-            onChange={this.update("currentLocation")}
-            value={this.state.currentLocation}
+            onChange={this.update("current")}
+            value={this.state.current}
             placeholder="Location"
           />
           <input
@@ -130,11 +98,11 @@ class HomePage extends React.Component {
             className="submit-button"
           />
           </form>
-          <form onSubmit={this.handleSubmit("historicLocation")}>
+          <form onSubmit={this.handleSubmit("historic")}>
             <p>Enter a date and location for historic weather</p>
           <input type="text"
-            onChange={this.update("historicLocation")}
-            value={this.state.historicLocation}
+            onChange={this.update("historic")}
+            value={this.state.historic}
             placeholder="Location"
           />
           <input type="date"

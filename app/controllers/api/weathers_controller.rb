@@ -3,9 +3,9 @@ require 'rest-client'
 class Api::WeathersController < ApplicationController
 
   def show
-    address = params[:address].split(" ").join("+")
-    # debugger
-    # date = params[:address][:date]
+
+    address = params[:address][:address].split(" ").join("+")
+    date = params[:address][:date]
     address = "https://maps.googleapis.com/maps/api/geocode/json?address=#{address}&key=#{ENV["GOOGLE"]}"
     begin
       response = RestClient.get(address)
@@ -17,8 +17,6 @@ class Api::WeathersController < ApplicationController
     formatted_address = google_response["formatted_address"]
     lat = google_response["geometry"]["location"]["lat"]
     long = google_response["geometry"]["location"]["lng"]
-
-    date = nil
     if date
       date = ",#{date}"
     end
