@@ -60,6 +60,7 @@ class HomePage extends React.Component {
           <input type="text"
             onChange={this.update("currentLocation")}
             value={this.state.currentLocation}
+            placeholder="Location"
           />
 
           </form>
@@ -68,6 +69,7 @@ class HomePage extends React.Component {
           <input type="text"
             onChange={this.update("historicLocation")}
             value={this.state.historicLocation}
+            placeholder="Location"
           />
           <input type="date" />
           </form>

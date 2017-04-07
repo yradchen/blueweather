@@ -20,6 +20,9 @@ a {
 // Page layout set
 header {
   height: 5vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .main {
@@ -42,9 +45,10 @@ footer {
 }
 .end {
   justify-content: flex-end;
-
 }
+
 // Header
+
 
 .session-links * {
   margin: 10px;
@@ -73,11 +77,20 @@ footer {
   color: white;
 }
 
+#login:hover {
+  transform: scale(1.25, 1.25);
+  transition: 1.5s;
+}
 #logout {
   border: none;
   color: #3498db;
   background-color: white;
 }
+
+#home {
+  color: black;
+}
+
 // #2ecc71 green
 
 // Body
