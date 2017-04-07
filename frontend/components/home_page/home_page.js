@@ -10,6 +10,12 @@ class HomePage extends React.Component {
     this.fetchWeather.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.currentUser) {
+      this.props.fetchSearches();
+    }
+  }
+
   searchAddress(locationType) {
     const geocoder = new google.maps.Geocoder();
     const address = this.state[locationType];
@@ -52,7 +58,7 @@ class HomePage extends React.Component {
   }
 
   render() {
-    
+
     return (
       <section className="form-container">
         <div className="form">

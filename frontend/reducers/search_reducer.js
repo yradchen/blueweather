@@ -8,8 +8,8 @@ const SearchReducer = (state = {}, action) => {
     case RECEIVE_ALL_SEARCHES:
       return action.searches;
     case RECEIVE_SEARCH:
-      debugger
       newState = merge({}, state);
+      newState[action.search.id] = action.search;
       return newState;
     default:
       return state;
