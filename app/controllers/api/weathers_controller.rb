@@ -9,7 +9,6 @@ class Api::WeathersController < ApplicationController
     if date
       date = ",#{date}"
     end
-    debugger
     base_url = "https://api.darksky.net/forecast/"
     begin
       response = RestClient.get("#{base_url}#{ENV["DARK_SKY"]}/#{lat},#{long}#{date}")

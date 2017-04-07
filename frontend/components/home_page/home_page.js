@@ -61,6 +61,27 @@ class HomePage extends React.Component {
     };
   }
 
+  searchLi(search) {
+    const date = new Date(search.created_at).toString();
+    return (
+      <li key={search.created_at}>
+        <p>{search.location}</p>
+        <p>{date}</p>
+      </li>
+    );
+  }
+
+  setSearchHistory() {
+    const searches = this.props.searches.map(search => {
+      return this.searchLi(search);
+    });
+    return (
+      <ul>
+        {searches}
+      </ul>
+    );
+  }
+
   render() {
     return (
       <section className="form-container">
@@ -72,7 +93,11 @@ class HomePage extends React.Component {
             value={this.state.currentLocation}
             placeholder="Location"
           />
-
+          <input
+            type="submit"
+            value="Search Today"
+            className="submit-button"
+          />
           </form>
           <form onSubmit={this.handleSubmit("historicLocation")}>
             <p>Enter a date and location for historic weather</p>
@@ -84,6 +109,14 @@ class HomePage extends React.Component {
           <input type="date"
           onChange={this.update("date")}/>
           </form>
+          <input
+            type="submit"
+            value="Historic Search"
+            className="submit-button"
+          />
+        </div>
+        <div>
+          {this.setSearchHistory()}
         </div>
       </section>
     );

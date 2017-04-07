@@ -5,7 +5,7 @@ import { createSearch, fetchSearches } from '../../actions/search_actions';
 const mapStateToProps = (state, ownProps) => {
   return {
     currentUser: state.session.currentUser,
-    searches: Object.keys(state.searches).map(id => state.searches[id])
+    searches: Object.keys(state.searches).reverse().map(id => state.searches[id])
   };
 };
 const mapDispatchToProps = (dispatch) => {
