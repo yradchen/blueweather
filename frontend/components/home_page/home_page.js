@@ -2,11 +2,13 @@ import React from 'react';
 import { Link, hashHistory, withRouter } from 'react-router';
 import moment from 'moment';
 // import parser from 'parse-address';
+
 class HomePage extends React.Component {
   constructor (props) {
     super(props);
-    this.state = { current: "", historic: "", date: "" };
+    this.state = { current: "", historic: "", date: ""};
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.getWeatherByGeocode = this.getWeatherByGeocode.bind(this);
   }
 
   componentDidMount() {
@@ -19,15 +21,19 @@ class HomePage extends React.Component {
     return e => this.setState({[field]: e.currentTarget.value});
   }
 
+  getWeatherByGeocode(geocode, location) {
+    debugger
+    // this.props.fetchWeather(geocode).then(action => {
+    // });
+  }
+
   handleSubmit(locationType) {
     return (e) => {
       e.preventDefault();
       const search_params = this.setSearchParams(locationType);
-      this.props.fetchWeather(search_params).then(data =>{
-        const location = data.weather[1];
-        hashHistory.push(`${locationType}/${location}`);
+      this.props.fetchGeocode(search_params).then(action => {
+        hashHistory.push(`${locationType}/${search_params.address}`);
       });
-
     };
   }
 
@@ -40,17 +46,15 @@ class HomePage extends React.Component {
   }
 
   parseDate() {
-    return  new Date(this.state.date).getTime() / 1000;
+    return new Date(this.state.date.replace(/-/g, '\/')).getTime() / 1000;
   }
-
-
-
 
   searchLi(search) {
     const date = moment(search.created_at).format('MMMM Do YYYY, h:mm:ss a');
     return (
       <li key={search.created_at}
         className="flex search-li"
+        onClick={() => this.getWeatherByGeocode(search)}
         // onClick={() => this.fetchWeather(search.lat, search.long, search.location, "currentLocation")}
         >
         <p>{search.location}</p>

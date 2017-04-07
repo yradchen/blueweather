@@ -6,9 +6,9 @@ export const receiveWeather = (weather) => ({
   weather
 });
 
-export const fetchWeather = (lat, long, date) => dispatch => {
+export const fetchWeather = (geocode) => dispatch => {
   return (
-  WeatherApiUtil.fetchWeather(lat, long, date)
+  WeatherApiUtil.fetchWeather(geocode)
   .then(weather => dispatch(receiveWeather(weather)))
 );
 };

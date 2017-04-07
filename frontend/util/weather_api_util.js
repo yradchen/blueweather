@@ -1,18 +1,8 @@
-// export const fetchWeather = (lat, long, date) => {
-//   return $.ajax({
-//     method: 'GET',
-//     url: `api/weather/`,
-//     data: { weather: { lat: lat, long: long, date: date } }
-//   });
-// };
 
-export const fetchWeather = (address) => {
-
+export const fetchWeather = (geocode) => {
   return $.ajax({
     method: 'GET',
     url: `api/weather/`,
-    data: { address }
+    data: { geocode }
   });
-    // data: { weather: { lat: lat, long: long, date: date } }
-  // });
 };
