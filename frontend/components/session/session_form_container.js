@@ -5,7 +5,7 @@ import SessionForm from './session_form';
 const mapStateToProps = (state, ownProps) => {
   const formType = ownProps.route.path.slice(1);
   return {
-    loggedIn: Boolean(state.session.username),
+    loggedIn: Boolean(state.session.currentUser),
     formType: formType,
     errors: state.errors
   };

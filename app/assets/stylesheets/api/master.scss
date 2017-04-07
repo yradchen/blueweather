@@ -1,0 +1,202 @@
+// RESET
+div, section, a, p, img, body, h1, h2, h3, h4, input, div, footer, form, main, section, header, ul, li, button {
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+// * {
+//   margin: 0;
+//   padding: 0;
+//   font-family: Helvetica, Arial, sans-serif;
+//   box-sizing: border-box;
+// }
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+// Page layout set
+header {
+  height: 5vh;
+}
+
+.main {
+  height: 90vh;
+}
+
+footer {
+  // margin-top: 5px;
+  height: 5vh;
+}
+
+#session-header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+// General classes
+.flex {
+  display: flex;
+}
+.end {
+  justify-content: flex-end;
+
+}
+// Header
+
+.session-links * {
+  margin: 10px;
+  padding: 5px;
+  border-radius: 2px;
+  transition: 1.5s;
+}
+
+.session-links a:hover {
+  transform: scale(1.25, 1.25);
+  transition: 1.5s;
+}
+
+.session-links button:hover {
+  transform: scale(1.25, 1.25);
+  transition: 1.5s;
+}
+
+#signup {
+  color: #3498db;
+  background-color: white;
+}
+
+#login {
+  background-color: #0f79bf;
+  color: white;
+}
+
+#logout {
+  border: none;
+  color: #3498db;
+  background-color: white;
+}
+// #2ecc71 green
+
+// Body
+
+body {
+  background-color: #3498db;
+}
+
+
+// FOOTER
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid white;
+  padding: 10px;
+}
+
+.footer-links a {
+  margin: 10px;
+  color: black;
+}
+
+// Forms
+
+.form-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form {
+  width: 350px;
+  height: auto;
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.form input {
+  width: 100%;
+  border-radius: 6px;
+  padding: 5px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.form p {
+  text-align: center;
+}
+
+// Submit-buttons
+.submit-button {
+  border: none;
+  background-color: #0f79bf;
+  transition: 1.5s;
+  font-size: 14px;
+}
+
+.submit-button:hover {
+  background-color: #095384;
+  transition: 1.5s;
+}
+// Weather
+.week-container {
+  padding: 15px;
+  display: flex;
+  width: 100vw;
+  font-size: 12px;
+}
+
+.daily-weather {
+  width: calc(100vw / 8);
+  box-sizing: border-box;
+  background-color: white;
+  box-shadow: 0 3px 2px #D7D7D7;
+  margin: 2px;
+  padding: 5px;
+  border-radius: 6px;
+}
+
+.daily-weather p {
+  margin-bottom: 2px;
+}
+
+.daily-weather img {
+  width: 100%;
+  height: auto;
+}
+
+.centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+.date {
+  text-align: center;
+  font-size: 15px;
+}
+.summary {
+  text-align: center;
+}
+// Weather SVG
+svg {
+  // height: 500px;
+  // width: 960px;
+  box-sizing: border-box;
+  box-shadow: 0 1px 2px #D7D7D7;
+  font: 20px sans-serif;
+  background: white;
+  border-radius: 10px;
+}
+
+.axis {
+  font-size: 18px;
+}

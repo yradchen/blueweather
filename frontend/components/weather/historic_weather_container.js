@@ -9,8 +9,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-  };
+  return {};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HistoricWeather);

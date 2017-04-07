@@ -13,6 +13,7 @@ const graphWeather = (weather) => {
     g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
+
   var x = d3.scaleTime()
     .rangeRound([0, width]);
 
@@ -27,12 +28,14 @@ const graphWeather = (weather) => {
   y.domain(d3.extent(data, function(d) { return d.temperature; }));
 
   g.append("g")
+    .attr("class", "axis")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x))
-    .select(".domain")
-    .remove();
+    .select(".domain");
+    // .remove();
 
   g.append("g")
+    .attr("class", "axis")
     .call(d3.axisLeft(y))
     .append("text")
     .attr("fill", "#000")

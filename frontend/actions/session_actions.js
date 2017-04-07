@@ -1,10 +1,10 @@
 import * as SessionAPIUtil from '../util/session_api_util';
 import { receiveErrors } from './error_actions';
-export const RECEIVE_CURRENT_USER = "RECEIVE_USER";
+export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 
-export const receiveCurrentUser = (user) => ({
+export const receiveCurrentUser = (currentUser) => ({
   type: RECEIVE_CURRENT_USER,
-  user
+  currentUser
 });
 
 export const login = (user) => dispatch => (
@@ -22,5 +22,5 @@ export const signup = (user) => dispatch => (
 );
 
 export const logout = () => dispatch => (
-  SessionAPIUtil.logout().then(user => dispatch(receiveCurrentUser({})))
+  SessionAPIUtil.logout().then(user => dispatch(receiveCurrentUser(null)))
 );

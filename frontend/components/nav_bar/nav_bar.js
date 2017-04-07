@@ -9,10 +9,9 @@ class NavBar extends React.Component {
 
   sessionLinks() {
     return (
-      <div>
-        <Link to="/login">Login</Link>
-        <p> | </p>
-        <Link to="/signup">Sign up</Link>
+      <div className="flex session-links end">
+        <Link to="/login" id="login">Log in</Link>
+        <Link to="/signup" id="signup">Sign up</Link>
       </div>
     );
   }
@@ -23,10 +22,9 @@ class NavBar extends React.Component {
 
   showName() {
     return (
-      <div>
-        <h1>{this.props.currentUser}</h1>
-        <p> | </p>
-        <button onClick={this.logOutUser}>Log Out</button>
+      <div className="flex session-links end">
+        <p>{this.props.currentUser}</p>
+        <button onClick={this.logOutUser} id="logout">Log Out</button>
       </div>
     );
   }
@@ -35,9 +33,9 @@ class NavBar extends React.Component {
     const display = this.props.currentUser ? this.showName() : this.sessionLinks();
 
     return (
-      <div>
+      <header>
         {display}
-      </div>
+      </header>
     );
   }
 }

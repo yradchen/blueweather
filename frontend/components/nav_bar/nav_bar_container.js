@@ -3,8 +3,12 @@ import NavBar from './nav_bar';
 import { logout } from '../../actions/session_actions';
 
 const mapStateToProps = (state, ownProps) => {
+  let currentUser = null;
+  if (state.session.currentUser) {
+    currentUser = state.session.currentUser.username;
+  }
   return {
-    currentUser: state.session.username
+    currentUser
   };
 };
 

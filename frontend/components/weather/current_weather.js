@@ -11,18 +11,19 @@ class CurrentWeather extends React.Component {
       graphWeather(this.props.weather.hourly.data);
     }
   }
-  // <img src={images.cloudy}/>
+
   setWeatherImage(string) {
     const imageName = string.split("-").join("");
     return <img src={images[imageName]} />;
   }
-  weatherSummary(date) {
-    const weather = this.props.weather[date];
+  weatherSummary(time) {
+    const weather = this.props.weather[time];
+    const date = new Date(weather.time * 1000).toDateString();
 
     return (
-      <div className="current-weather">
-        <p>Today</p>
-        <p>{weather.summary}</p>
+      <div className="daily-weather">
+        <p className="date">{date}</p>
+        <p className="summary">{weather.summary}</p>
         {this.setWeatherImage(weather.icon)}
         <p>Current Temp: {weather.temperature}</p>
         <p>Chance of Precipitation: {Math.round(weather.precipProbability * 100)}%</p>
@@ -37,8 +38,8 @@ class CurrentWeather extends React.Component {
 
       return (
         <div key={date} className="daily-weather">
-          <p>{date}</p>
-          <p>{datum.summary}</p>
+          <p className="date">{date}</p>
+          <p className="summary">{datum.summary}</p>
           {this.setWeatherImage(datum.icon)}
           <p>Min Temp: {datum.temperatureMin}</p>
           <p>Max Temp: {datum.temperatureMax}</p>
@@ -52,8 +53,9 @@ class CurrentWeather extends React.Component {
     if (this.props.weather.currently === undefined) return null;
 
     return (
-      <div>
-        <svg width="960" height="500"></svg>
+      <div className="centered">
+        <h1>{this.props.location}</h1>
+        <svg width="960" height="400"></svg>
         <section className="week-container">
           {this.weatherSummary("currently")}
           {this.weatherWeek()}

@@ -32,7 +32,6 @@ class SessionForm extends React.Component {
       placeholder={fieldName}
       onChange={this.update(fieldName)}
       key={fieldName}
-      className="capitalize"
     />
     );
   }
@@ -54,6 +53,7 @@ class SessionForm extends React.Component {
       <input
         type="submit"
         value={value}
+        className="submit-button"
       />
     );
   }
@@ -63,6 +63,11 @@ class SessionForm extends React.Component {
     this.props.action(this.state);
   }
 
+  setHeader() {
+    const header = this.props.formType === "login" ? "Log in" : "Sign up";
+    return <h3 id="session-header">{header}</h3>;
+  }
+
 
   render() {
     const errors = this.props.errors.map((err, idx) => (
@@ -70,13 +75,14 @@ class SessionForm extends React.Component {
     ));
 
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
+      <section className="form-container">
+        <form onSubmit={this.handleSubmit} className="form">
+          {this.setHeader()}
           {this.setFields()}
           {this.createSubmit()}
         </form>
         {errors}
-      </div>
+      </section>
 
     );
   }

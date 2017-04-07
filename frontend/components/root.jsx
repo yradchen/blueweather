@@ -8,7 +8,7 @@ import WeatherContainer from './weather/weather_container';
 
 const Root = ({ store }) => {
   const _redirectIfLoggedIn = (store) => {
-    const currentUser = store.getState().session.username;
+    const currentUser = store.getState().session.currentUser;
     return (nextState, replace) => {
       if (currentUser) {
         replace('/');
@@ -20,7 +20,7 @@ const Root = ({ store }) => {
     <Provider store={ store }>
       <Router history={ hashHistory } onUpdate={ () => window.scrollTo(0, 0) } >
         <Route component={ App }>
-          <Route path="/current" component={WeatherContainer} />
+          <Route path="/current/:location" component={WeatherContainer} />
           <Route path="/" component={HomePageContainer} />
 
           <Route onEnter={_redirectIfLoggedIn(store)}>

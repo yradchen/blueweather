@@ -1,10 +1,9 @@
+<main id="root"></main>
+
 <script type="text/javascript">
-  <% if logged_in? %>
-    window.currentUser = <%= render(
-      "api/users/user.json.jbuilder",
-      user: current_user
-    ).html_safe %>
-  <% end %>
+<% if logged_in? %>
+  window.currentUser = <%= render("api/users/user.json.jbuilder", user: current_user).html_safe %>
+<% end %>
   window.images = {
   clearday: "<%= image_path("clear-day.png") %>",
   clearnight: "<%= image_path("clear-night.png") %>",
@@ -18,5 +17,3 @@
   wind: "<%= image_path("wind.png") %>"
 };
 </script>
-
-<main id="root"></main>
