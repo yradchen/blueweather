@@ -4,5 +4,6 @@ Rails.application.routes.draw do
     resources :users, only: [:create, :show, :update]
     resource :session, only: [:create, :destroy]
     resource :weather, only: [:show, :index]
+    resource :searches, only: [:show, :create]
   end
 end
