@@ -4,7 +4,7 @@ import { Link, hashHistory, withRouter } from 'react-router';
 class HomePage extends React.Component {
   constructor (props) {
     super(props);
-    this.state = { currentLocation: "", historicLocation : "" };
+    this.state = { currentLocation: "", historicLocation : "", date: "" };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleResponse = this.handleResponse.bind(this);
     this.fetchWeather.bind(this);
@@ -39,8 +39,12 @@ class HomePage extends React.Component {
 
   fetchWeather (lat, long, location, locationType) {
     const url = locationType === "currentLocation" ? "current" : "historic";
-    this.props.createSearch( { search: { lat, long, location } } );
-    this.props.fetchWeather(lat, long).then(
+    let date;
+    if (locationType === "historicLocation") {
+      date = new Date(this.state.date).getTime() / 1000;
+    }
+    // this.props.createSearch( { search: { lat, long, location } } );
+    this.props.fetchWeather(lat, long, date).then(
       hashHistory.push(`${url}/${location}`)
     );
   }
@@ -58,7 +62,6 @@ class HomePage extends React.Component {
   }
 
   render() {
-
     return (
       <section className="form-container">
         <div className="form">
@@ -78,9 +81,9 @@ class HomePage extends React.Component {
             value={this.state.historicLocation}
             placeholder="Location"
           />
-          <input type="date" />
+          <input type="date"
+          onChange={this.update("date")}/>
           </form>
-
         </div>
       </section>
     );

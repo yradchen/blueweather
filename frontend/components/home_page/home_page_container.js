@@ -10,7 +10,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchWeather: (lat, long) => dispatch(fetchWeather(lat, long)),
+    fetchWeather: (lat, long, date) => dispatch(fetchWeather(lat, long, date)),
     createSearch: (search) => dispatch(createSearch(search)),
     fetchSearches: () => dispatch(fetchSearches())
   };

@@ -6,9 +6,13 @@ class Api::WeathersController < ApplicationController
     lat = params[:weather][:lat]
     long = params[:weather][:long]
     date = params[:weather][:date]
+    if date
+      date = ",#{date}"
+    end
+    debugger
     base_url = "https://api.darksky.net/forecast/"
     begin
-      response = RestClient.get("#{base_url}#{ENV["DARK_SKY"]}/#{lat},#{long}")
+      response = RestClient.get("#{base_url}#{ENV["DARK_SKY"]}/#{lat},#{long}#{date}")
     rescue => e
       return render json: [e.response], status: e.http_code
     end

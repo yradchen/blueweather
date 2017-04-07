@@ -51,6 +51,7 @@ class CurrentWeather extends React.Component {
 
   render() {
     if (this.props.weather.currently === undefined) return null;
+    debugger
     return (
       <div className="centered">
         <h1>{this.props.location}</h1>

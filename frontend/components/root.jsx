@@ -21,6 +21,7 @@ const Root = ({ store }) => {
       <Router history={ hashHistory } onUpdate={ () => window.scrollTo(0, 0) } >
         <Route component={ App }>
           <Route path="/current/:location" component={WeatherContainer} />
+          <Route path="/historic/:location" component={WeatherContainer} />
           <Route path="/" component={HomePageContainer} />
 
           <Route onEnter={_redirectIfLoggedIn(store)}>
