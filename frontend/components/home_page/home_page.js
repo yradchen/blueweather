@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, hashHistory, withRouter } from 'react-router';
+import moment from 'moment';
 
 class HomePage extends React.Component {
   constructor (props) {
@@ -43,11 +44,12 @@ class HomePage extends React.Component {
     if (locationType === "historicLocation") {
       date = new Date(this.state.date).getTime() / 1000;
     }
-    // this.props.createSearch( { search: { lat, long, location } } );
+    this.props.createSearch( { search: { lat, long, location } } );
     this.props.fetchWeather(lat, long, date).then(
       hashHistory.push(`${url}/${location}`)
     );
   }
+
 
   update(field) {
     return e => this.setState({[field]: e.currentTarget.value});
@@ -62,13 +64,26 @@ class HomePage extends React.Component {
   }
 
   searchLi(search) {
-    const date = new Date(search.created_at).toString();
+    const date = moment(search.created_at).format('MMMM Do YYYY, h:mm:ss a');
     return (
-      <li key={search.created_at}>
+      <li key={search.created_at}
+        className="flex search-li"
+        onClick={() => this.fetchWeather(search.lat, search.long, search.location, "currentLocation")}
+        >
         <p>{search.location}</p>
         <p>{date}</p>
       </li>
     );
+  }
+
+  search(lat, long, location) {
+    return (e) => {
+      let date;
+      this.props.createSearch( { search: { lat, long, location } } );
+      this.props.fetchWeather(lat, long, date).then(
+        hashHistory.push(`${url}/${location}`)
+      );
+    };
   }
 
   setSearchHistory() {
@@ -80,6 +95,17 @@ class HomePage extends React.Component {
         {searches}
       </ul>
     );
+  }
+  createSearch() {
+    
+    if (this.props.currentUser) {
+      return (
+        <div id="search-history" className="form">
+          <p>Search History for {this.props.currentUser.username}</p>
+          {this.setSearchHistory()}
+        </div>
+      );
+    }
   }
 
   render() {
@@ -115,9 +141,8 @@ class HomePage extends React.Component {
             className="submit-button"
           />
         </div>
-        <div>
-          {this.setSearchHistory()}
-        </div>
+        {this.createSearch()}
+
       </section>
     );
   }

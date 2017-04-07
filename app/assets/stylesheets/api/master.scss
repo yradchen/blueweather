@@ -6,16 +6,12 @@ div, section, a, p, img, body, h1, h2, h3, h4, input, div, footer, form, main, s
   box-sizing: border-box;
 }
 
-// * {
-//   margin: 0;
-//   padding: 0;
-//   font-family: Helvetica, Arial, sans-serif;
-//   box-sizing: border-box;
-// }
-
 a {
   text-decoration: none;
   cursor: pointer;
+}
+li {
+  list-style: none;
 }
 // Page layout set
 header {
@@ -124,15 +120,17 @@ footer {
 }
 
 .form {
-  width: 350px;
-  height: auto;
+  min-width: 350px;
+  height: 300px; // previous auto
   border: 1px solid white;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 15px;
   background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: auto;
+  overflow-border: 10px;
 }
 
 .form input {
@@ -213,3 +211,19 @@ svg {
 .axis {
   font-size: 18px;
 }
+
+// searches
+#search-history {
+  margin-left: 10px;
+}
+
+.search-li {
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 5px;
+}
+.search-li p {
+  margin-right: 10px;
+}
+// form - height: 300px;
