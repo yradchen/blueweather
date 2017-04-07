@@ -33,6 +33,7 @@ class HomePage extends React.Component {
 
   fetchWeather (lat, long, location, locationType) {
     const url = locationType === "currentLocation" ? "current" : "historic";
+    this.props.createSearch( { search: { lat, long, location } } );
     this.props.fetchWeather(lat, long).then(
       hashHistory.push(`${url}/${location}`)
     );
@@ -51,7 +52,7 @@ class HomePage extends React.Component {
   }
 
   render() {
-
+    
     return (
       <section className="form-container">
         <div className="form">
