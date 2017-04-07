@@ -4,7 +4,9 @@ const WeatherReducer = (state = {}, action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_WEATHER:
-      return action.weather;
+      const weather = JSON.parse(action.weather[0]);
+      weather.location = action.weather[1];
+      return weather;
     default:
       return state;
   }

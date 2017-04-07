@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, hashHistory, withRouter } from 'react-router';
 import moment from 'moment';
-
+// import parser from 'parse-address';
 class HomePage extends React.Component {
   constructor (props) {
     super(props);
@@ -19,8 +19,12 @@ class HomePage extends React.Component {
 
   searchAddress(locationType) {
     const geocoder = new google.maps.Geocoder();
-    const address = this.state[locationType];
-    geocoder.geocode({ address }, this.handleResponse(locationType));
+    let address = this.state[locationType];
+    this.props.fetchWeather(address).then(data =>{
+      const location = data.weather[1];
+      hashHistory.push(`current/${location}`);
+    });
+    // geocoder.geocode({ address }, this.handleResponse(locationType));
   }
 
   handleResponse(locationType) {
