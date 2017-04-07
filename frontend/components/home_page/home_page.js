@@ -96,11 +96,12 @@ class HomePage extends React.Component {
       </ul>
     );
   }
+
   createSearch() {
-    
+
     if (this.props.currentUser) {
       return (
-        <div id="search-history" className="form">
+        <div id="search-history" className="form height-set">
           <p>Search History for {this.props.currentUser.username}</p>
           {this.setSearchHistory()}
         </div>
@@ -111,7 +112,7 @@ class HomePage extends React.Component {
   render() {
     return (
       <section className="form-container">
-        <div className="form">
+        <div className="form height-set">
           <form onSubmit={this.handleSubmit("currentLocation")}>
             <p>Find the current weather for:</p>
           <input type="text"
@@ -134,15 +135,14 @@ class HomePage extends React.Component {
           />
           <input type="date"
           onChange={this.update("date")}/>
-          </form>
           <input
             type="submit"
             value="Historic Search"
             className="submit-button"
           />
+          </form>
         </div>
         {this.createSearch()}
-
       </section>
     );
   }
