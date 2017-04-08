@@ -5,13 +5,13 @@ import Footer from './footer/footer';
 
 const App = ({ children }) => {
   return (
-    <div>
+    <main id="main">
       <NavBarContainer />
-      <main className="main">
+      <div id="body">
         { children }
-      </main>
+      </div>
       <Footer />
-    </div>
+    </main>
   );
 };
 

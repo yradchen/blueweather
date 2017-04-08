@@ -7,6 +7,11 @@ class Api::GeocodesController < ApplicationController
     rescue => e
       return render json: [e.response], status: e.http_code
     end
-    render json: response.body
+    results = JSON.parse(response)["results"][0]
+    if results
+      render json: response.body
+    else
+      render json: ["Location not found"], status: 422
+    end
   end
 end

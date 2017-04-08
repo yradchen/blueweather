@@ -1,15 +1,12 @@
 import React from 'react';
 import { Link, hashHistory, withRouter } from 'react-router';
 import moment from 'moment';
-// import parser from 'parse-address';
 
 class HomePage extends React.Component {
   constructor (props) {
     super(props);
     this.state = { current: "", historic: "", date: ""};
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.getWeatherByGeocode = this.getWeatherByGeocode.bind(this);
-    // this.fetchGeocode = this.props.fetchGeocode.bind(this);
   }
 
   componentDidMount() {
@@ -33,12 +30,40 @@ class HomePage extends React.Component {
     return (e) => {
       e.preventDefault();
       const search_params = this.setSearchParams(locationType);
+      if (this.blankField(locationType)) return this.setupErrors(locationType);
       this.props.fetchGeocode(search_params).then(action => {
-        // this.props.createSearch( {})
         hashHistory.push(`${locationType}/${search_params.address}`);
       });
     };
   }
+  setupErrors(locationType) {
+    this.props.createErrors(["One or more fields is blank"]);
+  }
+//   blankFieldError(field) {
+//   const message = `Please enter your ${field}.`;
+//   if (this.state[`${field}`] === "") {
+//     return (
+//       <ul className={this.errorOuter}>
+//         <li className="error-inner">
+//           <p className="error-message">{message}</p>
+//         </li>
+//         <p className="error-arrow"> </p>
+//       </ul>
+//     );
+//   }
+//   return <p></p>;
+// }
+
+  blankField(locationType) {
+    if (locationType === "historic") {
+      if (this.state[locationType] === "" || this.state.date === "") {
+        return true;
+      }
+    } else {
+      return this.state[locationType] === "";
+    }
+  }
+
 
   setSearchParams(locationType) {
     const address = { address: this.state[locationType] };
@@ -86,10 +111,23 @@ class HomePage extends React.Component {
       );
     }
   }
+  setMaxDate() {
+    const yesterday = moment().subtract(1, 'day');
+    return yesterday.format('YYYY-MM-DD');
+  }
+  setMinDate() {
+    const minimum = moment().year(1970).month(0).date(1);
+    return minimum.format('YYYY-MM-DD');
+  }
 
   render() {
+    const errors = this.props.errors.map((err, idx) => (
+      <li key={idx}>{err}</li>
+    ));
+
     return (
       <section className="form-container">
+        { errors }
         <div className="form height-set">
           <form onSubmit={this.handleSubmit("current")}>
             <p>Find the current weather for:</p>
@@ -112,7 +150,9 @@ class HomePage extends React.Component {
             placeholder="Location"
           />
           <input type="date"
-          onChange={this.update("date")}/>
+          onChange={this.update("date")}
+          min={this.setMinDate()}
+          max={this.setMaxDate()}/>
           <input
             type="submit"
             value="Historic Search"

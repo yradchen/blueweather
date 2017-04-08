@@ -4,7 +4,6 @@ import { createSearch, fetchSearches } from '../../actions/search_actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    location: ownProps.params.location,
     weather: state.weather,
     currentUser: state.session.currentUser
   };

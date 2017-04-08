@@ -10,8 +10,16 @@ class SessionForm extends React.Component {
   update(field) {
     return e => this.setState({[field]: e.currentTarget.value});
   }
+
   componentDidMount() {
     this.redirectIfLoggedIn();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.location.pathname !== nextProps.location.pathname) {
+      this.setState({ username: "", password: "", email: ""});
+      // this.props.clearErrors();
+    }
   }
 
   componentDidUpdate() {
@@ -26,9 +34,8 @@ class SessionForm extends React.Component {
 
   createInput(fieldName) {
     const type = fieldName === 'username' ? 'text' : fieldName;
-
     return (<input type={type}
-      value={this.state.fieldName}
+      value={this.state[fieldName]}
       placeholder={fieldName}
       onChange={this.update(fieldName)}
       key={fieldName}

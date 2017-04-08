@@ -16,7 +16,7 @@ class CurrentWeather extends React.Component {
     if (this.props.currentUser) {
       const lat = this.props.weather.latitude;
       const long = this.props.weather.longitude;
-      const location = this.props.location;
+      const location = this.props.weather.location;
       this.props.createSearch({ lat, long, location});
     }
   }
@@ -63,7 +63,7 @@ class CurrentWeather extends React.Component {
     if (this.props.weather.currently === undefined) return null;
     return (
       <div className="centered">
-        <h1>{this.props.location}</h1>
+        <h1>{this.props.weather.location}</h1>
         <svg width="960" height="400"></svg>
         <section className="week-container">
           {this.weatherSummary("currently")}
