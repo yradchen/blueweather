@@ -9,6 +9,6 @@ export const createSearch = (search) => {
   return $.ajax({
     method: 'POST',
     url: 'api/searches/',
-    data: search
+    data: { search }
   });
 };

@@ -12,10 +12,20 @@ class CurrentWeather extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.currentUser) {
+      const lat = this.props.weather.latitude;
+      const long = this.props.weather.longitude;
+      const location = this.props.location;
+      this.props.createSearch({ lat, long, location});
+    }
+  }
+
   setWeatherImage(string) {
     const imageName = string.split("-").join("");
     return <img src={images[imageName]} />;
   }
+
   weatherSummary(time) {
     const weather = this.props.weather[time];
     const date = new Date(weather.time * 1000).toDateString();
@@ -66,8 +76,3 @@ class CurrentWeather extends React.Component {
 }
 
 export default CurrentWeather;
-
-// this.props.weather.currently.temperature
-// this.props.weather.currently.icon
-// this.props.weather.currently.precipProbability - chance of rain
-// this.props.weather.currently.time

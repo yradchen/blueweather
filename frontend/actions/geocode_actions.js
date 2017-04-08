@@ -3,7 +3,6 @@ import * as GeocodeApiUtil from '../util/geocode_api_util';
 import { fetchWeather } from './weather_actions';
 
 export const fetchGeocode = (address) => dispatch => {
-  debugger
   return (
     GeocodeApiUtil.fetchGeocode(address)
     .then(geocode => {

@@ -3,7 +3,6 @@ require 'rest-client'
 class Api::WeathersController < ApplicationController
 
   def show
-    debugger
     lat = params["geocode"]["lat"]
     lng = params["geocode"]["lng"]
     date = params["geocode"]["date"]

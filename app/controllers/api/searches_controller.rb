@@ -1,6 +1,7 @@
 class Api::SearchesController < ApplicationController
   def create
     @search = Search.new(search_params)
+
     @search.user_id = current_user.id
     if @search.save
       render 'api/searches/show'

@@ -9,6 +9,7 @@ class HomePage extends React.Component {
     this.state = { current: "", historic: "", date: ""};
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getWeatherByGeocode = this.getWeatherByGeocode.bind(this);
+    // this.fetchGeocode = this.props.fetchGeocode.bind(this);
   }
 
   componentDidMount() {
@@ -21,10 +22,11 @@ class HomePage extends React.Component {
     return e => this.setState({[field]: e.currentTarget.value});
   }
 
-  getWeatherByGeocode(geocode, location) {
-    debugger
-    // this.props.fetchWeather(geocode).then(action => {
-    // });
+  getWeatherByGeocode(search) {
+    const geocode = { lat: search.lat, lng: search.long, address: search.location};
+    this.props.fetchWeather(geocode).then(action => {
+      hashHistory.push(`current/${search.location}`);
+    });
   }
 
   handleSubmit(locationType) {
@@ -32,6 +34,7 @@ class HomePage extends React.Component {
       e.preventDefault();
       const search_params = this.setSearchParams(locationType);
       this.props.fetchGeocode(search_params).then(action => {
+        // this.props.createSearch( {})
         hashHistory.push(`${locationType}/${search_params.address}`);
       });
     };
@@ -55,7 +58,6 @@ class HomePage extends React.Component {
       <li key={search.created_at}
         className="flex search-li"
         onClick={() => this.getWeatherByGeocode(search)}
-        // onClick={() => this.fetchWeather(search.lat, search.long, search.location, "currentLocation")}
         >
         <p>{search.location}</p>
         <p>{date}</p>
@@ -74,7 +76,7 @@ class HomePage extends React.Component {
     );
   }
 
-  createSearch() {
+  showSearchHistory() {
     if (this.props.currentUser) {
       return (
         <div id="search-history" className="form height-set">
@@ -118,7 +120,7 @@ class HomePage extends React.Component {
           />
           </form>
         </div>
-        {this.createSearch()}
+        {this.showSearchHistory()}
       </section>
     );
   }

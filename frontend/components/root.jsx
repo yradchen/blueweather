@@ -8,8 +8,8 @@ import WeatherContainer from './weather/weather_container';
 
 const Root = ({ store }) => {
   const _redirectIfLoggedIn = (store) => {
-    const currentUser = store.getState().session.currentUser;
     return (nextState, replace) => {
+      const currentUser = store.getState().session.currentUser;
       if (currentUser) {
         replace('/');
       }
