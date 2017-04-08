@@ -21,7 +21,9 @@ class HomePage extends React.Component {
 
   getWeatherByGeocode(search) {
     const geocode = { lat: search.lat, lng: search.long, address: search.location};
+    this.props.setLoadingState(true);
     this.props.fetchWeather(geocode).then(action => {
+      this.props.setLoadingState(false);
       hashHistory.push(`current/${search.location}`);
     });
   }
@@ -31,7 +33,9 @@ class HomePage extends React.Component {
       e.preventDefault();
       const search_params = this.setSearchParams(locationType);
       if (this.blankField(locationType)) return this.setupErrors(locationType);
+      this.props.setLoadingState(true);
       this.props.fetchGeocode(search_params).then(action => {
+        this.props.setLoadingState(false);
         hashHistory.push(`${locationType}/${search_params.address}`);
       });
     };
@@ -39,20 +43,6 @@ class HomePage extends React.Component {
   setupErrors(locationType) {
     this.props.createErrors(["One or more fields is blank"]);
   }
-//   blankFieldError(field) {
-//   const message = `Please enter your ${field}.`;
-//   if (this.state[`${field}`] === "") {
-//     return (
-//       <ul className={this.errorOuter}>
-//         <li className="error-inner">
-//           <p className="error-message">{message}</p>
-//         </li>
-//         <p className="error-arrow"> </p>
-//       </ul>
-//     );
-//   }
-//   return <p></p>;
-// }
 
   blankField(locationType) {
     if (locationType === "historic") {
