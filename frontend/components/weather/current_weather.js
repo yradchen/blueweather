@@ -42,6 +42,7 @@ class CurrentWeather extends React.Component {
   }
 
   weatherWeek() {
+    
     const dailyWeather = this.props.weather.daily.data.slice(1);
     return dailyWeather.map(datum  => {
       const date = new Date(datum.time * 1000).toDateString();
