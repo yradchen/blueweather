@@ -25,19 +25,5 @@ export const fetchGeocode = (address) => dispatch => {
   return (
     GeocodeApiUtil.fetchGeocode(address)
     .then(startRetrievingWeather(dispatch, address), handleErrors(dispatch))
-
   );
 };
-
-// export const fetchGeocode = (address) => dispatch => {
-//   return (
-//     GeocodeApiUtil.fetchGeocode(address)
-//     .then(geocode => {
-//       const location = geocode.results[0].geometry.location;
-//       location.address = geocode.results[0].formatted_address;
-//       if (address.date) location.date = address.date;
-//       return dispatch(fetchWeather(location));
-//     }, handleErrors(dispatch))
-//
-//   );
-// };

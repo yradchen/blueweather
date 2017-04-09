@@ -21,7 +21,6 @@ class HomePage extends React.Component {
 
   getWeatherByGeocode(search) {
     const geocode = { lat: search.lat, lng: search.long, address: search.location};
-    this.props.setLoadingState(true);
     this.props.fetchWeather(geocode).then(action => {
       this.props.setLoadingState(false);
       hashHistory.push(`current/${search.location}`);
@@ -35,7 +34,6 @@ class HomePage extends React.Component {
       if (this.blankField(locationType)) return this.setupErrors(locationType);
       this.props.setLoadingState(true);
       this.props.fetchGeocode(search_params).then(action => {
-        this.props.setLoadingState(false);
         hashHistory.push(`${locationType}/${search_params.address}`);
       });
     };
