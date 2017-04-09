@@ -1,24 +1,21 @@
-# README
+# Blueweather
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[Blueweather Live][blueweather]
 
-Things you may want to cover:
+[blueweather]: https://blueweather.herokuapp.com/#/
 
-* Ruby version
+Blueweather is a full-stack web application that allows users to find the current weather and forecast of any location. Users are also able to input a date and location to see the weather of that location on that date.
 
-* System dependencies
+## Technologies
 
-* Configuration
+* JavaScript
+* Ruby on Rails
+* React/Redux
+* HTML 5
+* D3
 
-* Database creation
+## Future Features
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Implement a use current location button to allow users to find information on current location
+* Add a date column to search history to allow users to visit historic searches
+* Allow users to search through a range of dates

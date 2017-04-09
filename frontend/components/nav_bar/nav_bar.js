@@ -8,9 +8,14 @@ class NavBar extends React.Component {
   }
 
   sessionLinks() {
+    const guest = { username: "Guest", password: "wizardhat1" };
     return (
       <div className="flex session-links">
-        <Link to="/login" id="login">Log in</Link>
+        <button className="login guest"
+          onClick={() => this.props.login(guest)}>
+          Guest
+          </button>
+        <Link to="/login" className="login">Log in</Link>
         <Link to="/signup" id="signup">Sign up</Link>
       </div>
     );

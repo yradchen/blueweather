@@ -6,6 +6,10 @@ div, section, a, p, img, body, h1, h2, h3, h4, input, div, footer, form, main, s
   box-sizing: border-box;
 }
 
+button {
+  font-size: inherit;
+}
+
 a {
   text-decoration: none;
   cursor: pointer;
@@ -70,12 +74,13 @@ header {
   background-color: white;
 }
 
-#login {
+.login {
   background-color: #0f79bf;
   color: white;
+  border: none;
 }
 
-#login:hover {
+.login:hover {
   transform: scale(1.25, 1.25);
   transition: 1.5s;
 }
