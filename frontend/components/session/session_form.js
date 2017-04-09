@@ -77,9 +77,7 @@ class SessionForm extends React.Component {
 
 
   render() {
-    const errors = this.props.errors.map((err, idx) => (
-      <li key={idx}>{err}</li>
-    ));
+    const errors = <li id="errors">{this.props.errors[0]}</li>;
 
     return (
       <section className="form-container">
@@ -87,8 +85,9 @@ class SessionForm extends React.Component {
           {this.setHeader()}
           {this.setFields()}
           {this.createSubmit()}
+          {errors}
         </form>
-        {errors}
+
       </section>
 
     );

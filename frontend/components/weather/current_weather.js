@@ -42,7 +42,7 @@ class CurrentWeather extends React.Component {
   }
 
   weatherWeek() {
-    
+
     const dailyWeather = this.props.weather.daily.data.slice(1);
     return dailyWeather.map(datum  => {
       const date = new Date(datum.time * 1000).toDateString();
@@ -60,8 +60,21 @@ class CurrentWeather extends React.Component {
     });
   }
 
+  renderHistoric() {
+    let date = this.props.weather.currently.time;
+    date = new Date(date * 1000).toDateString();
+    return (
+      <div className="centered">
+        <h1>{this.props.weather.location} on {date}</h1>
+        <svg width="960" height="500"></svg>
+      </div>
+    );
+  }
+
   render() {
     if (this.props.weather.currently === undefined) return null;
+    if (this.props.location.includes("historic")) return this.renderHistoric();
+
     return (
       <div className="centered">
         <h1>{this.props.weather.location}</h1>

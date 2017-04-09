@@ -35,7 +35,7 @@ class NavBar extends React.Component {
     return (
       <header>
         <div className="session-links flex">
-          <Link to="/" id="home">Home</Link>
+          <Link to="/" id="home"><img src={images.logo} id="nav-logo"/></Link>
         </div>
         {display}
       </header>

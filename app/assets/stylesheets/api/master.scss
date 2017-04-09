@@ -10,9 +10,20 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
+
 li {
   list-style: none;
 }
+
+input {
+  outline: none;
+}
+
+// inputs #0379C1
+// header 069DD8
+// body 02C8F2
+
+
 // Page layout set
 #main {
   min-height: 100vh;
@@ -21,18 +32,27 @@ li {
 header {
   height: 5vh;
   display: flex;
+  margin-bottom: 5px;
   justify-content: space-between;
   align-items: center;
+  background: #069DD8;
+  // border-bottom: 1px solid #3586bb;
+  position: fixed;
+  width: 100%;
+  // box-shadow: 0 1px 0px #2e8ac5;
 }
 
 #body {
-  min-height: 90vh;
+  padding-top: 7vh;
+  min-height: 95vh;
+  padding-top: 6vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 footer {
-  margin-top: 5px;
   height: 5vh;
-  border-bottom: 1px solid green;
 }
 
 #session-header {
@@ -50,6 +70,9 @@ footer {
 
 // Header
 
+#nav-logo {
+  height: 5vh;
+}
 
 .session-links * {
   margin: 10px;
@@ -92,26 +115,24 @@ footer {
   color: black;
 }
 
-// #2ecc71 green
-
 // Body
 
 body {
-  background-color: #3498db;
+  background-color: #02C8F2;
 }
-
 
 // FOOTER
 
 footer {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border-top: 1px solid white;
-  padding: 10px;
+  padding: 0 20px;
 }
 
 .footer-links a {
-  margin: 10px;
+  margin-left: 20px;
   color: black;
 }
 
@@ -120,12 +141,14 @@ footer {
 .form-container {
   height: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
 .form {
   min-width: 350px;
+  max-width: 400px;
+  max-height: 310px;
   border: 1px solid white;
   border-radius: 5px;
   padding: 15px;
@@ -142,7 +165,7 @@ footer {
 }
 
 .height-set {
-  height: 300px;
+  height: 310px;
 }
 
 .form input {
@@ -160,9 +183,10 @@ footer {
 // Submit-buttons
 .submit-button {
   border: none;
-  background-color: #0f79bf;
+  background-color: #0379C1;
   transition: 1.5s;
   font-size: 14px;
+  cursor: pointer;
 }
 
 .submit-button:hover {
@@ -236,6 +260,7 @@ svg {
   padding: 5px;
   cursor: pointer;
   transition: 1s;
+  font-size: 14px;
 }
 
 .search-li:hover {
@@ -245,4 +270,12 @@ svg {
 .search-li p {
   margin-right: 10px;
 }
-// form - height: 300px;
+
+
+#errors {
+  background-color: #b94a48;
+  font-size: 17px;
+  border: 1px #b94a48;
+  border-radius: 3px;
+  text-align: center;
+}

@@ -39,7 +39,7 @@ class HomePage extends React.Component {
     };
   }
   setupErrors(locationType) {
-    this.props.createErrors(["One or more fields is blank"]);
+    this.props.createErrors(["Please fill out required fields"]);
   }
 
   blankField(locationType) {
@@ -92,7 +92,7 @@ class HomePage extends React.Component {
   showSearchHistory() {
     if (this.props.currentUser) {
       return (
-        <div id="search-history" className="form height-set">
+        <div id="search-history" className="form">
           <p>Search History for {this.props.currentUser.username}</p>
           {this.setSearchHistory()}
         </div>
@@ -110,12 +110,11 @@ class HomePage extends React.Component {
 
   render() {
     const errors = this.props.errors.map((err, idx) => (
-      <li key={idx}>{err}</li>
+      <li key={idx} id="errors">{err}</li>
     ));
 
     return (
       <section className="form-container">
-        { errors }
         <div className="form height-set">
           <form onSubmit={this.handleSubmit("current")}>
             <p>Find the current weather for:</p>
@@ -147,6 +146,7 @@ class HomePage extends React.Component {
             className="submit-button"
           />
           </form>
+          { errors }
         </div>
         {this.showSearchHistory()}
       </section>
