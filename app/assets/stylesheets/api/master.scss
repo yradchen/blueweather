@@ -19,15 +19,13 @@ input {
   outline: none;
 }
 
-// inputs #0379C1
-// header 069DD8
-// body 02C8F2
 
-
-// Page layout set
+// Page layout
 #main {
   min-height: 100vh;
+  background-color: #02C8F2;
 }
+// Header
 
 header {
   height: 5vh;
@@ -36,23 +34,8 @@ header {
   justify-content: space-between;
   align-items: center;
   background: #069DD8;
-  // border-bottom: 1px solid #3586bb;
   position: fixed;
   width: 100%;
-  // box-shadow: 0 1px 0px #2e8ac5;
-}
-
-#body {
-  padding-top: 7vh;
-  min-height: 95vh;
-  padding-top: 6vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-footer {
-  height: 5vh;
 }
 
 #session-header {
@@ -60,15 +43,6 @@ footer {
   margin-bottom: 10px;
 }
 
-// General classes
-.flex {
-  display: flex;
-}
-.end {
-  justify-content: flex-end;
-}
-
-// Header
 
 #nav-logo {
   height: 5vh;
@@ -105,6 +79,7 @@ footer {
   transform: scale(1.25, 1.25);
   transition: 1.5s;
 }
+
 #logout {
   border: none;
   color: #3498db;
@@ -117,26 +92,35 @@ footer {
 
 // Body
 
-body {
-  background-color: #02C8F2;
-}
-
-// FOOTER
-
-footer {
+#body {
+  padding-top: 7vh;
+  min-height: 95vh;
+  padding-top: 6vh;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  border-top: 1px solid white;
-  padding: 0 20px;
 }
 
-.footer-links a {
-  margin-left: 20px;
-  color: black;
+// Errors
+
+#errors {
+  background-color: #b94a48;
+  font-size: 17px;
+  border: 1px #b94a48;
+  border-radius: 3px;
+  text-align: center;
 }
 
-// Forms
+
+.flex {
+  display: flex;
+}
+
+.end {
+  justify-content: flex-end;
+}
+
+// Container Login/Logout and find weather
 
 .form-container {
   height: 100%;
@@ -180,7 +164,6 @@ footer {
   text-align: center;
 }
 
-// Submit-buttons
 .submit-button {
   border: none;
   background-color: #0379C1;
@@ -193,7 +176,9 @@ footer {
   background-color: #095384;
   transition: 1.5s;
 }
+
 // Weather
+
 .week-container {
   padding: 15px;
   display: flex;
@@ -226,6 +211,7 @@ footer {
   align-items: center;
   height: 100%;
 }
+
 .date {
   text-align: center;
   font-size: 15px;
@@ -233,10 +219,10 @@ footer {
 .summary {
   text-align: center;
 }
+
 // Weather SVG
 svg {
-  // height: 500px;
-  // width: 960px;
+  margin-top: 15px;
   box-sizing: border-box;
   box-shadow: 0 1px 2px #D7D7D7;
   font: 20px sans-serif;
@@ -248,7 +234,7 @@ svg {
   font-size: 18px;
 }
 
-// searches
+// Searches
 #search-history {
   margin-left: 10px;
 }
@@ -271,11 +257,18 @@ svg {
   margin-right: 10px;
 }
 
+// Footer
 
-#errors {
-  background-color: #b94a48;
-  font-size: 17px;
-  border: 1px #b94a48;
-  border-radius: 3px;
-  text-align: center;
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid white;
+  padding: 0 20px;
+  height: 5vh;
+}
+
+.footer-links a {
+  margin-left: 20px;
+  color: black;
 }

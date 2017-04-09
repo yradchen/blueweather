@@ -1,5 +1,6 @@
 import React from 'react';
 import graphWeather from './graph_weather';
+import { hashHistory } from 'react-router';
 
 class CurrentWeather extends React.Component {
   constructor (props) {
@@ -9,6 +10,12 @@ class CurrentWeather extends React.Component {
   componentDidUpdate() {
     if (this.props.weather.hourly) {
       graphWeather(this.props.weather.hourly.data);
+    }
+  }
+
+  componentDidMount() {
+    if (!this.props.weather.hourly) {
+      hashHistory.push("/");
     }
   }
 

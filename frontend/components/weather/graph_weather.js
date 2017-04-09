@@ -10,7 +10,7 @@ const graphWeather = (weather) => {
   var svg = d3.select("svg");
   svg.selectAll("*").remove();
 
-  var margin = {top: 20, right: 20, bottom: 30, left: 50},
+  var margin = {top: 20, right: 110, bottom: 30, left: 50},
     width = +svg.attr("width") - margin.left - margin.right,
     height = +svg.attr("height") - margin.top - margin.bottom,
     g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -36,8 +36,7 @@ const graphWeather = (weather) => {
     .y(function(d) { return y(d.precipProbability); });
 
   x.domain(d3.extent(data, function(d) { return d.date; }));
-  // y.domain(d3.extent(data, function(d) { return d.temperature, d.wind; }));
-  // y.domain(d3.extent(data, function(d) { return d.temperature, d.wind; }));
+
   y.domain([0, d3.max(data, function(d) { return Math.max(d.temperature, d.wind, d.precipProbability); })]);
 
   g.append("g")
@@ -54,8 +53,8 @@ const graphWeather = (weather) => {
     .attr("transform", "rotate(-90)")
     .attr("y", 6)
     .attr("dy", "0.71em")
-    .attr("text-anchor", "end")
-    .text("Temperature");
+    .attr("text-anchor", "end");
+  //   .text("Temperature");
 
   g.append("path")
     .datum(data)
@@ -84,6 +83,29 @@ const graphWeather = (weather) => {
       .attr("stroke-width", 1.5)
       .attr("d", linePrecip);
 
+    g.append("text")
+      .style("font", "14px times")
+  		.attr("transform", "translate(" + (width+3) + "," + y(data[data.length -1].temperature) + ")")
+  		.attr("dy", ".35em")
+  		.attr("text-anchor", "start")
+  		.style("fill", "red")
+  		.text("Temperature");
+
+    g.append("text")
+      .style("font", "14px times")
+  		.attr("transform", "translate(" + (width+3) + "," + y(data[data.length -1].wind) + ")")
+  		.attr("dy", ".35em")
+  		.attr("text-anchor", "start")
+  		.style("fill", "green")
+  		.text("Wind Speed");
+
+    g.append("text")
+      .style("font", "14px times")
+  		.attr("transform", "translate(" + (width+3) + "," + y(data[data.length -1].precipProbability) + ")")
+  		.attr("dy", ".35em")
+  		.attr("text-anchor", "start")
+  		.style("fill", "steelblue")
+  		.text(`Chance of Precip`);
 };
 
 export default graphWeather;
