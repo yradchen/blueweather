@@ -18,7 +18,6 @@ class SessionForm extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.location.pathname !== nextProps.location.pathname) {
       this.setState({ username: "", password: "", email: ""});
-      // this.props.clearErrors();
     }
   }
 

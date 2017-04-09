@@ -47,65 +47,40 @@ const graphWeather = (weather) => {
 
   g.append("g")
     .attr("class", "axis")
-    .call(d3.axisLeft(y))
-    .append("text")
-    .attr("fill", "#000")
-    .attr("transform", "rotate(-90)")
-    .attr("y", 6)
-    .attr("dy", "0.71em")
-    .attr("text-anchor", "end");
-  //   .text("Temperature");
+    .call(d3.axisLeft(y));
 
-  g.append("path")
-    .datum(data)
-    .attr("fill", "none")
-    .attr("stroke", "red")
-    .attr("stroke-linejoin", "round")
-    .attr("stroke-linecap", "round")
-    .attr("stroke-width", 1.5)
-    .attr("d", lineTemp);
-    // debugger
-  g.append("path")
-    .datum(data)
-    .attr("fill", "none")
-    .attr("stroke", "green")
-    .attr("stroke-linejoin", "round")
-    .attr("stroke-linecap", "round")
-    .attr("stroke-width", 1.5)
-    .attr("d", lineWind);
-
+  const createPath = (line, color) => {
     g.append("path")
       .datum(data)
       .attr("fill", "none")
-      .attr("stroke", "steelblue")
+      .attr("stroke", color)
       .attr("stroke-linejoin", "round")
       .attr("stroke-linecap", "round")
       .attr("stroke-width", 1.5)
-      .attr("d", linePrecip);
+      .attr("d", line);
+    };
 
+  createPath(linePrecip, "steelblue");
+  createPath(lineTemp, "red");
+  createPath(lineWind, "green");
+
+
+  const createPathText = (dataKey, dataText, color) => {
     g.append("text")
       .style("font", "14px times")
-  		.attr("transform", "translate(" + (width+3) + "," + y(data[data.length -1].temperature) + ")")
-  		.attr("dy", ".35em")
-  		.attr("text-anchor", "start")
-  		.style("fill", "red")
-  		.text("Temperature");
+      .attr("transform", "translate(" + (width+3) + "," + y(data[data.length -1][dataKey]) + ")")
+      .attr("dy", ".35em")
+      .attr("text-anchor", "start")
+      .style("fill", color)
+      .text(dataText);
+  };
 
-    g.append("text")
-      .style("font", "14px times")
-  		.attr("transform", "translate(" + (width+3) + "," + y(data[data.length -1].wind) + ")")
-  		.attr("dy", ".35em")
-  		.attr("text-anchor", "start")
-  		.style("fill", "green")
-  		.text("Wind Speed");
 
-    g.append("text")
-      .style("font", "14px times")
-  		.attr("transform", "translate(" + (width+3) + "," + y(data[data.length -1].precipProbability) + ")")
-  		.attr("dy", ".35em")
-  		.attr("text-anchor", "start")
-  		.style("fill", "steelblue")
-  		.text(`Chance of Precip`);
+  createPathText("precipProbability", "Chance of Precip", "steelblue");
+  createPathText("wind", "Wind speed", "green");
+  createPathText("temperature", "Temperature", "red");
+
 };
+
 
 export default graphWeather;
