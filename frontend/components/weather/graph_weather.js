@@ -9,7 +9,7 @@ const graphWeather = (weather) => {
 
   var svg = d3.select("svg");
   svg.selectAll("*").remove();
-
+  debugger
   var margin = {top: 20, right: 110, bottom: 30, left: 50},
     width = +svg.attr("width") - margin.left - margin.right,
     height = +svg.attr("height") - margin.top - margin.bottom,

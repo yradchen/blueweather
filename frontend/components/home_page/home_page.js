@@ -125,7 +125,7 @@ class HomePage extends React.Component {
           />
           <input
             type="submit"
-            value="Search Today"
+            value="Search Current Weather"
             className="submit-button"
           />
           </form>

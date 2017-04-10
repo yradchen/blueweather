@@ -73,7 +73,7 @@ class CurrentWeather extends React.Component {
     return (
       <div className="centered">
         <h1>{this.props.weather.location} on {date}</h1>
-        <svg width="960" height="500"></svg>
+        <svg width={this.props.width} height={this.props.height}></svg>
       </div>
     );
   }
@@ -85,7 +85,7 @@ class CurrentWeather extends React.Component {
     return (
       <div className="centered">
         <h1>{this.props.weather.location}</h1>
-        <svg width="960" height="400"></svg>
+        <svg width={this.props.width} height={this.props.height}></svg>
         <section className="week-container">
           {this.weatherSummary("currently")}
           {this.weatherWeek()}
