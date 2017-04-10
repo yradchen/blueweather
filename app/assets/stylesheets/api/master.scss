@@ -28,6 +28,7 @@ input {
 #main {
   min-height: 100vh;
   background-color: #02C8F2;
+  width: 100vw;
 }
 
 // Header
@@ -193,7 +194,6 @@ header {
 }
 
 .daily-weather {
-  width: calc(100vw / 8);
   box-sizing: border-box;
   background-color: white;
   box-shadow: 0 3px 2px #D7D7D7;
@@ -237,7 +237,7 @@ svg {
 }
 
 .axis {
-  font-size: 80%;
+  font-size: 50%;
 }
 
 // Searches
