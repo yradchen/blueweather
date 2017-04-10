@@ -59,17 +59,17 @@ header {
   margin: 10px;
   padding: 5px;
   border-radius: 2px;
-  transition: 1.5s;
+  transition: 1.0s;
 }
 
 .session-links a:hover {
   transform: scale(1.25, 1.25);
-  transition: 1.5s;
+  transition: 1.0s;
 }
 
 .session-links button:hover {
   transform: scale(1.25, 1.25);
-  transition: 1.5s;
+  transition: 1.0s;
 }
 
 #signup {
@@ -85,7 +85,7 @@ header {
 
 .login:hover {
   transform: scale(1.25, 1.25);
-  transition: 1.5s;
+  transition: 1.0s;
 }
 
 #logout {
@@ -178,11 +178,12 @@ header {
   transition: 1.5s;
   font-size: 14px;
   cursor: pointer;
+  transition: 1.0s;
 }
 
 .submit-button:hover {
   background-color: #095384;
-  transition: 1.5s;
+  transition: 1.0s;
 }
 
 // Weather

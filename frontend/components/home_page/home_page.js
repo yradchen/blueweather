@@ -15,6 +15,15 @@ class HomePage extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+
+    if (nextProps.currentUser) {
+      if (this.props.currentUser !== nextProps.currentUser) {
+        this.props.fetchSearches();
+      }
+    }
+  }
+
   update(field) {
     return e => this.setState({[field]: e.currentTarget.value});
   }
@@ -95,6 +104,12 @@ class HomePage extends React.Component {
         <div id="search-history" className="form">
           <p>Search History for {this.props.currentUser.username}</p>
           {this.setSearchHistory()}
+        </div>
+      );
+    } else {
+      return (
+        <div id="search-history" className="form">
+          <p>Login to access search history</p>
         </div>
       );
     }
