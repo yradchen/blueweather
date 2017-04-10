@@ -3,8 +3,9 @@ import CurrentWeather from './current_weather';
 import { createSearch, fetchSearches } from '../../actions/search_actions';
 
 const mapStateToProps = (state, ownProps) => {
+
   return {
-    height: window.screen.height * 0.5,
+    height: window.screen.width * 0.3,
     width: window.screen.width * 0.8,
     weather: state.weather,
     currentUser: state.session.currentUser,

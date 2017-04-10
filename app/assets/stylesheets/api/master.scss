@@ -29,6 +29,7 @@ input {
   min-height: 100vh;
   background-color: #02C8F2;
 }
+
 // Header
 
 header {
@@ -236,7 +237,7 @@ svg {
 }
 
 .axis {
-  font-size: 18px;
+  font-size: 80%;
 }
 
 // Searches
@@ -276,4 +277,38 @@ footer {
 .footer-links a {
   margin-left: 20px;
   color: black;
+}
+
+
+@media screen and (max-width: 800px) {
+  .axis {
+    font-size: 30%;
+  }
+  footer {
+    font-size: 8px;
+  }
+  header {
+    width: 100vw;
+  }
+  .week-container {
+    font-size: 40%;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0px;
+  }
+  .daily-weather {
+  width: calc(100vw / 2.2);
+  margin: 0px 0px 10px 10px;
+  }
+  .form {
+    min-width: inherit;
+    max-width: none;
+  }
+  #body {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  svg {
+    margin-bottom: 10px;
+  }
 }

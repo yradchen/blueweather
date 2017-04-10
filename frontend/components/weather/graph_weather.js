@@ -9,8 +9,8 @@ const graphWeather = (weather) => {
 
   var svg = d3.select("svg");
   svg.selectAll("*").remove();
-  debugger
-  var margin = {top: 20, right: 110, bottom: 30, left: 50},
+  
+  var margin = {top: 20, right: 90, bottom: 30, left: 50},
     width = +svg.attr("width") - margin.left - margin.right,
     height = +svg.attr("height") - margin.top - margin.bottom,
     g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -67,7 +67,7 @@ const graphWeather = (weather) => {
 
   const createPathText = (dataKey, dataText, color) => {
     g.append("text")
-      .style("font", "14px times")
+      .classed("axis", true)
       .attr("transform", "translate(" + (width+3) + "," + y(data[data.length -1][dataKey]) + ")")
       .attr("dy", ".35em")
       .attr("text-anchor", "start")

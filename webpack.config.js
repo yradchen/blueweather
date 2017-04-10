@@ -22,6 +22,7 @@ plugins = plugins.concat(
 );
 
 module.exports = {
+  context: __dirname,
   entry: './frontend/entry.jsx',
   output: {
     path: path.resolve(__dirname, 'app', 'assets', 'javascripts'),
