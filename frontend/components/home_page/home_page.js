@@ -75,16 +75,25 @@ class HomePage extends React.Component {
   }
 
   searchLi(search) {
-    const date = moment(search.created_at).format('MMMM Do YYYY, h:mm:ss a');
+    const creationDate = moment(search.created_at).format('MMMM Do YYYY, h:mm:ss a');
     return (
       <li key={search.created_at}
         className="flex search-li"
         onClick={() => this.getWeatherByGeocode(search)}
         >
-        <p>{search.location}</p>
-        <p>{date}</p>
+        {/* <div> */}
+          <p>{search.location}</p>
+          <p>{creationDate}</p>
+        {/* </div> */}
+        {/* {this.historicDate(search.date)} */}
       </li>
     );
+  }
+  historicDate(date) {
+    if (date) {
+      const HistoricDate = moment(parseInt(date * 1000)).format('MMMM Do YYYY');
+      return <p>{HistoricDate}</p>;
+    }
   }
 
   setSearchHistory() {
@@ -118,19 +127,33 @@ class HomePage extends React.Component {
     const yesterday = moment().subtract(1, 'day');
     return yesterday.format('YYYY-MM-DD');
   }
+
   setMinDate() {
     const minimum = moment().year(1970).month(0).date(1);
     return minimum.format('YYYY-MM-DD');
   }
 
+  getLocation() {
+    navigator.geolocation.getCurrentPosition(
+     (position) => {
+       debugger
+       this.setState({initialPosition});
+     },
+     (error) => console.log(JSON.stringify(error)),
+     {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+   );
+  }
+
+
   render() {
     const errors = this.props.errors.map((err, idx) => (
       <li key={idx} id="errors">{err}</li>
     ));
-
+    debugger
     return (
       <section className="form-container">
         <div className="form height-set">
+          <button onClick={this.getLocation}>Location</button>
           <form onSubmit={this.handleSubmit("current")}>
             <p>Find the current weather for:</p>
           <input type="text"

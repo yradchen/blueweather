@@ -6,6 +6,7 @@ const WeatherReducer = (state = {}, action) => {
     case RECEIVE_WEATHER:
       const weather = JSON.parse(action.weather[0]);
       weather.location = action.weather[1];
+      weather.date = action.weather[2];
       return weather;
     default:
       return state;

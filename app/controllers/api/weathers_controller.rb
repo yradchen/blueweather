@@ -15,8 +15,7 @@ class Api::WeathersController < ApplicationController
     rescue => e
       return render json: [e.response], status: e.http_code
     end
-
-    render json: [response.body, params["geocode"]["address"]]
+    render json: [response.body, params["geocode"]["address"], params["geocode"]["date"]]
   end
 
 end

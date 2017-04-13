@@ -21,10 +21,19 @@ class CurrentWeather extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.currentUser) {
-      const lat = this.props.weather.latitude;
-      const long = this.props.weather.longitude;
-      const location = this.props.weather.location;
-      this.props.createSearch({ lat, long, location});
+      this.createSearch();
+    }
+  }
+
+  createSearch() {
+    const lat = this.props.weather.latitude;
+    const long = this.props.weather.longitude;
+    const location = this.props.weather.location;
+    const date = this.props.weather.date;
+    if (date) {
+      this.props.createSearch({ lat, long, location, date});
+    } else {
+      this.props.createSearch({ lat, long, location });
     }
   }
 

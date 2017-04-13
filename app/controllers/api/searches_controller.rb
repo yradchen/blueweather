@@ -1,8 +1,8 @@
 class Api::SearchesController < ApplicationController
   def create
     @search = Search.new(search_params)
-
     @search.user_id = current_user.id
+
     if @search.save
       render 'api/searches/show'
     else
@@ -17,6 +17,6 @@ class Api::SearchesController < ApplicationController
 
   private
   def search_params
-    params.require(:search).permit(:lat, :long, :location)
+    params.require(:search).permit(:lat, :long, :location, :date)
   end
 end

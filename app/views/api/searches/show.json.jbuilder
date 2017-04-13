@@ -1,1 +1,1 @@
-json.extract! @search, :lat, :long, :location, :id, :created_at
+json.extract! @search, :lat, :long, :location, :id, :date, :created_at
