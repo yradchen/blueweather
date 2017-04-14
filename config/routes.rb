@@ -6,5 +6,6 @@ Rails.application.routes.draw do
     resource :weather, only: [:show]
     resource :geocode, only: [:show]
     resources :searches, only: [:index, :create]
+    resource :reverse_geolocations, only: [:show]
   end
 end

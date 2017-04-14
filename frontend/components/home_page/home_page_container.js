@@ -3,6 +3,7 @@ import HomePage from './home_page';
 import { fetchWeather } from '../../actions/weather_actions';
 import { createSearch, fetchSearches } from '../../actions/search_actions';
 import { fetchGeocode } from '../../actions/geocode_actions';
+import { fetchReverseGeocode } from '../../actions/reverse_geolocation_actions';
 import { createErrors } from '../../actions/error_actions';
 import { setLoadingState } from '../../actions/loading_actions';
 
@@ -20,7 +21,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchSearches: () => dispatch(fetchSearches()),
     fetchGeocode: (location) => dispatch(fetchGeocode(location)),
     createErrors: (errors) => dispatch(createErrors(errors)),
-    setLoadingState: (boolean) => dispatch(setLoadingState(boolean))
+    setLoadingState: (boolean) => dispatch(setLoadingState(boolean)),
+    fetchReverseGeocode: (position) => dispatch(fetchReverseGeocode(position))
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
