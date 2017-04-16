@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link, hashHistory, withRouter } from 'react-router';
 import moment from 'moment';
+import CurrentLocation from './current_location';
 
 class HomePage extends React.Component {
   constructor (props) {
     super(props);
     this.state = { current: "", historic: "", date: ""};
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.getLocation = this.getLocation.bind(this);
+    // this.getLocation = this.getLocation.bind(this);
   }
 
   componentDidMount() {
@@ -61,7 +62,6 @@ class HomePage extends React.Component {
       return this.state[locationType] === "";
     }
   }
-
 
   setSearchParams(locationType) {
     const address = { address: this.state[locationType] };
@@ -134,31 +134,36 @@ class HomePage extends React.Component {
     return minimum.format('YYYY-MM-DD');
   }
 
-  getLocation() {
-    navigator.geolocation.getCurrentPosition(
-     (position) => {
-       const search = {};
-       search.lat = position.coords.latitude;
-       search.lng = position.coords.longitude;
-       this.props.fetchReverseGeocode(search).then(action => {
-         hashHistory.push(`current/current`);
-        // } hashHistory.push(`${locationType}/${search_params.address}`);;
-      });
-     },
-     (error) => console.log(JSON.stringify(error)),
-     {enableHighAccuracy: true, timeout: 7000, maximumAge: 1000}
-   );
-  }
+  // getLocation() {
+  //   navigator.geolocation.getCurrentPosition(
+  //    (position) => {
+  //      const search = {};
+  //      search.lat = position.coords.latitude;
+  //      search.lng = position.coords.longitude;
+  //      this.props.fetchReverseGeocode(search).then(action => {
+  //        hashHistory.push(`current/current`);
+  //       // } hashHistory.push(`${locationType}/${search_params.address}`);;
+  //     });
+  //    },
+  //    (error) => console.log(JSON.stringify(error)),
+  //    {enableHighAccuracy: true, timeout: 7000, maximumAge: 1000}
+  //  );
+  // }
 
 
   render() {
     const errors = this.props.errors.map((err, idx) => (
-      <li key={idx} id="errors">{err}</li>
+      <li key={idx} className="errors">{err}</li>
     ));
     return (
       <section className="form-container">
         <div className="form height-set">
-          <button onClick={this.getLocation}>Location</button>
+          <CurrentLocation
+            fetchReverseGeocode={this.props.fetchReverseGeocode}
+            setLoadingState={this.props.setLoadingState}
+            createErrors={this.props.createErrors}
+          />
+          {/* <button onClick={this.getLocation}>Location</button> */}
           <form onSubmit={this.handleSubmit("current")}>
             <p>Find the current weather for:</p>
           <input type="text"

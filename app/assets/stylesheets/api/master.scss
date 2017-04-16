@@ -111,12 +111,13 @@ header {
 
 // Errors
 
-#errors {
+.errors {
   background-color: #b94a48;
-  font-size: 17px;
+  font-size: 100%;
   border: 1px #b94a48;
   border-radius: 3px;
   text-align: center;
+  padding: 5px;
 }
 
 
@@ -126,6 +127,19 @@ header {
 
 .end {
   justify-content: flex-end;
+}
+
+.blink {
+  animation: blinker 1.5s linear infinite;
+}
+
+
+.hidden {
+  display: none;
+}
+
+@keyframes blinker {
+  50% { opacity: 0; }
 }
 
 // Container Login/Logout and find weather
@@ -160,7 +174,7 @@ header {
   height: 310px;
 }
 
-.form input {
+.form input, .fit-form {
   width: 100%;
   border-radius: 6px;
   padding: 5px;
