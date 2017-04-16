@@ -149,6 +149,13 @@ class HomePage extends React.Component {
   //    {enableHighAccuracy: true, timeout: 7000, maximumAge: 1000}
   //  );
   // }
+  containerType() {
+    if (this.props.currentUser) {
+      return "row-reverse";
+    } else {
+      return "column";
+    }
+  }
 
 
   render() {
@@ -156,8 +163,9 @@ class HomePage extends React.Component {
       <li key={idx} className="errors">{err}</li>
     ));
     return (
-      <section className="form-container">
-        <div className="form height-set">
+      <section className={`form-container ${this.containerType()}`}>
+        {this.showSearchHistory()}
+        <div className="form set-height">
           <CurrentLocation
             fetchReverseGeocode={this.props.fetchReverseGeocode}
             setLoadingState={this.props.setLoadingState}
@@ -196,7 +204,6 @@ class HomePage extends React.Component {
           </form>
           { errors }
         </div>
-        {this.showSearchHistory()}
       </section>
     );
   }
