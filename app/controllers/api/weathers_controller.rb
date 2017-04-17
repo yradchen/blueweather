@@ -13,7 +13,7 @@ class Api::WeathersController < ApplicationController
     begin
       response = RestClient.get("#{base_url}#{ENV["DARK_SKY"]}/#{lat},#{lng}#{date}")
     rescue => e
-      return render json: [e.response], status: e.http_code
+      return render json: ["Failed to connect to Dark Sky's weather service. Check your connection and try again."], status: 443
     end
     render json: [response.body, params["geocode"]["address"], params["geocode"]["date"]]
   end

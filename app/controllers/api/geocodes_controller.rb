@@ -5,7 +5,7 @@ class Api::GeocodesController < ApplicationController
     begin
       response = RestClient.get(address)
     rescue => e
-      return render json: [e.response], status: e.http_code
+      return render json: ["Failed to connect to google's geolocation services. Check your connection and try again."], status: 443
     end
     results = JSON.parse(response)["results"][0]
     if results

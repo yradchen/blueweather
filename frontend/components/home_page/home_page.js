@@ -18,7 +18,6 @@ class HomePage extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-
     if (nextProps.currentUser) {
       if (this.props.currentUser !== nextProps.currentUser) {
         this.props.fetchSearches();
@@ -29,12 +28,20 @@ class HomePage extends React.Component {
   update(field) {
     return e => this.setState({[field]: e.currentTarget.value});
   }
-
-  getWeatherByGeocode(search) {
+  checkSearchType(search) {
     const geocode = { lat: search.lat, lng: search.long, address: search.location};
+    if (search.date) {
+      geocode.date = search.date;
+      this.getWeatherByGeocode(geocode, "historic");
+    } else {
+      this.getWeatherByGeocode(geocode, "current");
+    }
+  }
+
+  getWeatherByGeocode(geocode, date) {
     this.props.fetchWeather(geocode).then(action => {
       this.props.setLoadingState(false);
-      hashHistory.push(`current/${search.location}`);
+      hashHistory.push(`${date}/${geocode.address}`);
     });
   }
 
@@ -49,6 +56,7 @@ class HomePage extends React.Component {
       });
     };
   }
+
   setupErrors(locationType) {
     this.props.createErrors(["Please fill out required fields"]);
   }
@@ -76,20 +84,25 @@ class HomePage extends React.Component {
   }
 
   searchLi(search) {
-    const creationDate = moment(search.created_at).format('MMMM Do YYYY, h:mm:ss a');
+    let searchDate;
+    if (search.date) {
+      searchDate = moment(parseInt(search.date)).format('MMMM Do YYYY, h:mm:ss');
+      searchDate = `Historic Date: ${searchDate}`;
+    }
+
     return (
       <li key={search.created_at}
         className="flex search-li"
-        onClick={() => this.getWeatherByGeocode(search)}
+        onClick={() => this.checkSearchType(search)}
         >
-        {/* <div> */}
+        <div>
           <p>{search.location}</p>
-          <p>{creationDate}</p>
-        {/* </div> */}
-        {/* {this.historicDate(search.date)} */}
+          <p>{searchDate}</p>
+        </div>
       </li>
     );
   }
+
   historicDate(date) {
     if (date) {
       const HistoricDate = moment(parseInt(date * 1000)).format('MMMM Do YYYY');
@@ -112,7 +125,7 @@ class HomePage extends React.Component {
     if (this.props.currentUser) {
       return (
         <div id="search-history" className="form">
-          <p>Search History for {this.props.currentUser.username}</p>
+          <p>Search history for {this.props.currentUser.username}</p>
           {this.setSearchHistory()}
         </div>
       );
@@ -124,6 +137,7 @@ class HomePage extends React.Component {
       );
     }
   }
+
   setMaxDate() {
     const yesterday = moment().subtract(1, 'day');
     return yesterday.format('YYYY-MM-DD');
@@ -134,21 +148,6 @@ class HomePage extends React.Component {
     return minimum.format('YYYY-MM-DD');
   }
 
-  // getLocation() {
-  //   navigator.geolocation.getCurrentPosition(
-  //    (position) => {
-  //      const search = {};
-  //      search.lat = position.coords.latitude;
-  //      search.lng = position.coords.longitude;
-  //      this.props.fetchReverseGeocode(search).then(action => {
-  //        hashHistory.push(`current/current`);
-  //       // } hashHistory.push(`${locationType}/${search_params.address}`);;
-  //     });
-  //    },
-  //    (error) => console.log(JSON.stringify(error)),
-  //    {enableHighAccuracy: true, timeout: 7000, maximumAge: 1000}
-  //  );
-  // }
   containerType() {
     if (this.props.currentUser) {
       return "row-reverse";
@@ -156,7 +155,6 @@ class HomePage extends React.Component {
       return "column";
     }
   }
-
 
   render() {
     const errors = this.props.errors.map((err, idx) => (
@@ -171,8 +169,8 @@ class HomePage extends React.Component {
             setLoadingState={this.props.setLoadingState}
             createErrors={this.props.createErrors}
           />
-          {/* <button onClick={this.getLocation}>Location</button> */}
           <form onSubmit={this.handleSubmit("current")}>
+            { errors }
             <p>Find the current weather for:</p>
           <input type="text"
             onChange={this.update("current")}
@@ -202,7 +200,6 @@ class HomePage extends React.Component {
             className="submit-button"
           />
           </form>
-          { errors }
         </div>
       </section>
     );

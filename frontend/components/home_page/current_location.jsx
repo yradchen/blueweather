@@ -79,7 +79,6 @@ class CurrentLocation extends React.Component {
     // {, maximumAge: 1000}
   }
 
-// getCurrentPosition takes three arg's. success, error, and options
   render() {
 
     return (
