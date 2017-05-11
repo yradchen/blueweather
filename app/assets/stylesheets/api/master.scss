@@ -309,10 +309,13 @@ footer {
     font-size: 30%;
   }
   footer {
-    font-size: 8px;
+    font-size: 30%;
   }
   header {
     width: 100vw;
+  }
+  .form-container {
+    flex-direction: column-reverse;
   }
   .week-container {
     font-size: 40%;

@@ -6,7 +6,7 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     height: window.screen.width * 0.3,
-    width: window.screen.width * 0.8,
+    width: window.screen.width * 0.7,
     weather: state.weather,
     currentUser: state.session.currentUser,
     location: ownProps.location.pathname
